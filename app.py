@@ -1,14 +1,27 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import sqlite3
 import os
 from datetime import datetime
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for React frontend
 
 # Database connection string
 DATABASE = 'data.db'
+
+# File upload configuration
+UPLOAD_FOLDER = 'public/player-images'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5MB max file size
+
+# Create upload folder if it doesn't exist
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def get_db_connection():
     """Create a database connection to the SQLite database"""
@@ -563,6 +576,57 @@ def release_player(player_id):
     conn.close()
     
     return jsonify({'message': 'Player released successfully'}), 200
+
+@app.route('/api/admin/upload-image', methods=['POST'])
+def upload_image():
+    """Admin: Upload player profile image"""
+    if 'image' not in request.files:
+        return jsonify({'error': 'No image file provided'}), 400
+    
+    if 'playerName' not in request.form:
+        return jsonify({'error': 'Player name is required'}), 400
+    
+    file = request.files['image']
+    player_name = request.form['playerName']
+    
+    if file.filename == '':
+        return jsonify({'error': 'No file selected'}), 400
+    
+    if file and allowed_file(file.filename):
+        # Use player name as filename (sanitized)
+        ext = os.path.splitext(file.filename)[1].lower()
+        # Create a safe filename from player name
+        safe_name = secure_filename(player_name.lower().replace(' ', '_'))
+        filename = f"{safe_name}{ext}"
+        
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(filepath)
+        
+        return jsonify({
+            'message': 'Image uploaded successfully',
+            'filename': filename
+        }), 201
+    
+    return jsonify({'error': 'Invalid file type. Allowed types: png, jpg, jpeg, gif, webp'}), 400
+
+@app.route('/player-images/<filename>')
+def serve_player_image(filename):
+    """Serve player profile images"""
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+@app.route('/api/check-player-image/<player_name>')
+def check_player_image(player_name):
+    """Check if a player image exists"""
+    safe_name = secure_filename(player_name.lower().replace(' ', '_'))
+    
+    # Check for common image extensions
+    for ext in ['.jpg', '.jpeg', '.png', '.gif', '.webp']:
+        filename = f"{safe_name}{ext}"
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        if os.path.exists(filepath):
+            return jsonify({'exists': True, 'filename': filename}), 200
+    
+    return jsonify({'exists': False, 'filename': None}), 200
 
 # ==================== MAIN ====================
 

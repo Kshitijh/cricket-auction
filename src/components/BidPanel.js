@@ -1,8 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnsold }) => {
   const [selectedTeam, setSelectedTeam] = useState('');
   const [bidAmount, setBidAmount] = useState('');
+  const [playerImage, setPlayerImage] = useState(null);
+
+  useEffect(() => {
+    // Check if player image exists whenever currentPlayer changes
+    const checkImage = async () => {
+      if (currentPlayer) {
+        try {
+          const response = await fetch(`http://localhost:5000/api/check-player-image/${encodeURIComponent(currentPlayer.name)}`);
+          const data = await response.json();
+          if (data.exists) {
+            setPlayerImage(data.filename);
+          } else {
+            setPlayerImage(null);
+          }
+        } catch (error) {
+          console.error('Error checking player image:', error);
+          setPlayerImage(null);
+        }
+      } else {
+        setPlayerImage(null);
+      }
+    };
+    
+    checkImage();
+  }, [currentPlayer]);
 
   const formatPrice = (price) => {
     return `₹${(price / 100000).toFixed(1)}L`;
@@ -59,8 +84,23 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
       <div className="current-auction">
         <h2>Current Auction</h2>
         <div className="player-details">
-          <h3 className="player-name-big">{currentPlayer.name}</h3>
-          <p className="player-role-big">{currentPlayer.role}</p>
+          <div className="player-auction-header">
+            {playerImage ? (
+              <img 
+                src={`http://localhost:5000/player-images/${playerImage}`} 
+                alt={currentPlayer.name}
+                className="player-auction-image"
+              />
+            ) : (
+              <div className="player-auction-image placeholder">
+                👤
+              </div>
+            )}
+            <div className="player-auction-info">
+              <h3 className="player-name-big">{currentPlayer.name}</h3>
+              <p className="player-role-big">{currentPlayer.role}</p>
+            </div>
+          </div>
           <p className="base-price">Base Price: {formatPrice(currentPlayer.basePrice)}</p>
           <div className="current-bid-display">
             <span className="label">Current Bid:</span>
