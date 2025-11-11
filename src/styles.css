@@ -456,6 +456,26 @@ body {
   padding: 20px;
 }
 
+.loading-container {
+  text-align: center;
+  padding: 60px 20px;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.loading-container p {
+  animation: pulse-text 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-text {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
 /* Scrollbar styling for team list */
 .team-list::-webkit-scrollbar {
   width: 8px;

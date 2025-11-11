@@ -11,8 +11,9 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
   const handlePlaceBid = () => {
     if (selectedTeam && bidAmount && currentPlayer) {
       const bidValue = parseInt(bidAmount);
+      const teamId = parseInt(selectedTeam);
       if (bidValue > currentBid) {
-        onPlaceBid(selectedTeam, currentPlayer.name, bidValue);
+        onPlaceBid(teamId, currentPlayer.name, bidValue);
         setBidAmount('');
       } else {
         alert('Bid must be higher than current bid!');

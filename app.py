@@ -307,11 +307,11 @@ def get_stats():
     
     # Most expensive player
     cursor.execute('''
-        SELECT name, role, sold_price, t.name as team_name
+        SELECT p.name, p.role, p.sold_price, t.name as team_name
         FROM players p
         LEFT JOIN teams t ON p.team_id = t.id
-        WHERE is_sold = 1 AND team_id IS NOT NULL
-        ORDER BY sold_price DESC
+        WHERE p.is_sold = 1 AND p.team_id IS NOT NULL
+        ORDER BY p.sold_price DESC
         LIMIT 1
     ''')
     most_expensive = cursor.fetchone()

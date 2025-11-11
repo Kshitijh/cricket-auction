@@ -1,76 +1,174 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PlayerCard from './PlayerCard';
 import BidPanel from './BidPanel';
 import TeamList from './TeamList';
 
+const API_BASE_URL = 'http://localhost:5000/api';
+
 const CricketAuction = () => {
-  const [players] = useState([
-    { id: 1, name: 'Virat Kohli', basePrice: 2000000, role: 'Batsman', sold: false },
-    { id: 2, name: 'Rohit Sharma', basePrice: 2000000, role: 'Batsman', sold: false },
-    { id: 3, name: 'Jasprit Bumrah', basePrice: 2000000, role: 'Bowler', sold: false },
-    { id: 4, name: 'MS Dhoni', basePrice: 2000000, role: 'Wicket-Keeper', sold: false },
-    { id: 5, name: 'Hardik Pandya', basePrice: 1500000, role: 'All-Rounder', sold: false },
-    { id: 6, name: 'Ravindra Jadeja', basePrice: 1500000, role: 'All-Rounder', sold: false },
-    { id: 7, name: 'KL Rahul', basePrice: 1500000, role: 'Batsman', sold: false },
-    { id: 8, name: 'Mohammed Shami', basePrice: 1500000, role: 'Bowler', sold: false },
-  ]);
-
-  const [teams, setTeams] = useState([
-    { id: 1, name: 'Mumbai Indians', budget: 10000000, players: [] },
-    { id: 2, name: 'Chennai Super Kings', budget: 10000000, players: [] },
-    { id: 3, name: 'Royal Challengers', budget: 10000000, players: [] },
-    { id: 4, name: 'Kolkata Knight Riders', budget: 10000000, players: [] },
-  ]);
-
+  const [players, setPlayers] = useState([]);
+  const [teams, setTeams] = useState([]);
   const [currentPlayer, setCurrentPlayer] = useState(null);
   const [currentBid, setCurrentBid] = useState(0);
-  const [soldPlayers, setSoldPlayers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch initial data from backend
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      // Fetch players and teams in parallel
+      const [playersRes, teamsRes] = await Promise.all([
+        fetch(`${API_BASE_URL}/players`),
+        fetch(`${API_BASE_URL}/teams`)
+      ]);
+
+      const playersData = await playersRes.json();
+      const teamsData = await teamsRes.json();
+
+      // Map database format to frontend format
+      const mappedPlayers = playersData.map(p => ({
+        id: p.id,
+        name: p.name,
+        basePrice: p.base_price,
+        role: p.role,
+        sold: p.is_sold === 1
+      }));
+
+      const mappedTeams = teamsData.map(t => ({
+        id: t.id,
+        name: t.name,
+        budget: t.current_budget,
+        players: t.players.map(p => ({
+          ...p,
+          soldPrice: p.sold_price
+        }))
+      }));
+
+      setPlayers(mappedPlayers);
+      setTeams(mappedTeams);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      alert('Failed to load auction data. Please check if the backend server is running.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const startAuction = (player) => {
-    if (!soldPlayers.includes(player.id)) {
+    if (!player.sold) {
       setCurrentPlayer(player);
       setCurrentBid(player.basePrice);
     }
   };
 
-  const placeBid = (teamName, playerName, bidValue) => {
+  const placeBid = async (teamId, playerName, bidValue) => {
     if (currentPlayer && bidValue > currentBid) {
-      setCurrentBid(bidValue);
-    }
-  };
-
-  const soldPlayer = (teamId) => {
-    if (currentPlayer && teamId) {
-      const team = teams.find(t => t.id === teamId);
-      if (team && team.budget >= currentBid) {
-        const updatedTeams = teams.map(t => {
-          if (t.id === teamId) {
-            return {
-              ...t,
-              budget: t.budget - currentBid,
-              players: [...t.players, { ...currentPlayer, soldPrice: currentBid }]
-            };
-          }
-          return t;
+      try {
+        // Record bid in database
+        const response = await fetch(`${API_BASE_URL}/auction/bid`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            player_id: currentPlayer.id,
+            team_id: teamId,
+            bid_amount: bidValue
+          })
         });
 
-        setTeams(updatedTeams);
-        setSoldPlayers([...soldPlayers, currentPlayer.id]);
-        setCurrentPlayer(null);
-        setCurrentBid(0);
+        if (response.ok) {
+          setCurrentBid(bidValue);
+        } else {
+          const error = await response.json();
+          alert('Error placing bid: ' + error.error);
+        }
+      } catch (error) {
+        console.error('Error placing bid:', error);
+        alert('Failed to place bid');
       }
     }
   };
 
-  const unsoldPlayer = () => {
-    if (currentPlayer) {
-      setSoldPlayers([...soldPlayers, currentPlayer.id]);
-      setCurrentPlayer(null);
-      setCurrentBid(0);
+  const soldPlayer = async (teamId) => {
+    if (currentPlayer && teamId) {
+      const team = teams.find(t => t.id === teamId);
+      if (team && team.budget >= currentBid) {
+        try {
+          // Mark player as sold in database
+          const response = await fetch(`${API_BASE_URL}/auction/sold`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              player_id: currentPlayer.id,
+              team_id: teamId,
+              sold_price: currentBid
+            })
+          });
+
+          if (response.ok) {
+            // Refresh data from backend
+            await fetchData();
+            setCurrentPlayer(null);
+            setCurrentBid(0);
+            alert(`${currentPlayer.name} sold to ${team.name} for ₹${(currentBid / 100000).toFixed(1)}L!`);
+          } else {
+            const error = await response.json();
+            alert('Error: ' + error.error);
+          }
+        } catch (error) {
+          console.error('Error selling player:', error);
+          alert('Failed to sell player');
+        }
+      } else {
+        alert('Insufficient budget!');
+      }
     }
   };
 
-  const availablePlayers = players.filter(p => !soldPlayers.includes(p.id));
+  const unsoldPlayer = async () => {
+    if (currentPlayer) {
+      try {
+        // Mark player as unsold in database
+        const response = await fetch(`${API_BASE_URL}/auction/unsold`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            player_id: currentPlayer.id
+          })
+        });
+
+        if (response.ok) {
+          // Refresh data from backend
+          await fetchData();
+          setCurrentPlayer(null);
+          setCurrentBid(0);
+          alert(`${currentPlayer.name} went unsold!`);
+        } else {
+          const error = await response.json();
+          alert('Error: ' + error.error);
+        }
+      } catch (error) {
+        console.error('Error marking player unsold:', error);
+        alert('Failed to mark player as unsold');
+      }
+    }
+  };
+
+  const availablePlayers = players.filter(p => !p.sold);
+
+  if (loading) {
+    return (
+      <div className="cricket-auction">
+        <h1 className="auction-title">🏏 Cricket Player Auction</h1>
+        <div className="loading-container">
+          <p>Loading auction data...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="cricket-auction">
@@ -79,16 +177,20 @@ const CricketAuction = () => {
       <div className="auction-container">
         <div className="left-section">
           <h2>Available Players</h2>
-          <div className="player-list">
-            {availablePlayers.map(player => (
-              <PlayerCard 
-                key={player.id}
-                player={player}
-                onStartAuction={startAuction}
-                isCurrentPlayer={currentPlayer?.id === player.id}
-              />
-            ))}
-          </div>
+          {availablePlayers.length === 0 ? (
+            <p className="no-players">All players have been sold or marked as unsold.</p>
+          ) : (
+            <div className="player-list">
+              {availablePlayers.map(player => (
+                <PlayerCard 
+                  key={player.id}
+                  player={player}
+                  onStartAuction={startAuction}
+                  isCurrentPlayer={currentPlayer?.id === player.id}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="center-section">
