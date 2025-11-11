@@ -330,6 +330,240 @@ def health_check():
     """Health check endpoint"""
     return jsonify({'status': 'healthy', 'database': DATABASE}), 200
 
+# ==================== ADMIN ENDPOINTS ====================
+
+@app.route('/api/admin/players', methods=['POST'])
+def add_player():
+    """Admin: Add a new player"""
+    data = request.json
+    name = data.get('name')
+    role = data.get('role')
+    base_price = data.get('base_price')
+    
+    if not all([name, role, base_price]):
+        return jsonify({'error': 'Missing required fields'}), 400
+    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute('''
+            INSERT INTO players (name, role, base_price)
+            VALUES (?, ?, ?)
+        ''', (name, role, base_price))
+        
+        conn.commit()
+        player_id = cursor.lastrowid
+        conn.close()
+        
+        return jsonify({'message': 'Player added successfully', 'id': player_id}), 201
+    except Exception as e:
+        conn.close()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/admin/players/<int:player_id>', methods=['PUT'])
+def update_player(player_id):
+    """Admin: Update player details"""
+    data = request.json
+    name = data.get('name')
+    role = data.get('role')
+    base_price = data.get('base_price')
+    
+    if not all([name, role, base_price]):
+        return jsonify({'error': 'Missing required fields'}), 400
+    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    cursor.execute('''
+        UPDATE players 
+        SET name = ?, role = ?, base_price = ?
+        WHERE id = ?
+    ''', (name, role, base_price, player_id))
+    
+    conn.commit()
+    
+    if cursor.rowcount == 0:
+        conn.close()
+        return jsonify({'error': 'Player not found'}), 404
+    
+    conn.close()
+    return jsonify({'message': 'Player updated successfully'}), 200
+
+@app.route('/api/admin/players/<int:player_id>', methods=['DELETE'])
+def delete_player(player_id):
+    """Admin: Delete a player"""
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # Delete related auction history first
+    cursor.execute('DELETE FROM auction_history WHERE player_id = ?', (player_id,))
+    
+    # Delete player
+    cursor.execute('DELETE FROM players WHERE id = ?', (player_id,))
+    
+    conn.commit()
+    
+    if cursor.rowcount == 0:
+        conn.close()
+        return jsonify({'error': 'Player not found'}), 404
+    
+    conn.close()
+    return jsonify({'message': 'Player deleted successfully'}), 200
+
+@app.route('/api/admin/teams', methods=['POST'])
+def add_team():
+    """Admin: Add a new team"""
+    data = request.json
+    name = data.get('name')
+    budget = data.get('budget', 10000000)  # Default 100L
+    
+    if not name:
+        return jsonify({'error': 'Team name is required'}), 400
+    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute('''
+            INSERT INTO teams (name, initial_budget, current_budget)
+            VALUES (?, ?, ?)
+        ''', (name, budget, budget))
+        
+        conn.commit()
+        team_id = cursor.lastrowid
+        conn.close()
+        
+        return jsonify({'message': 'Team added successfully', 'id': team_id}), 201
+    except sqlite3.IntegrityError:
+        conn.close()
+        return jsonify({'error': 'Team name already exists'}), 400
+    except Exception as e:
+        conn.close()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/admin/teams/<int:team_id>', methods=['PUT'])
+def update_team(team_id):
+    """Admin: Update team details"""
+    data = request.json
+    name = data.get('name')
+    budget = data.get('budget')
+    
+    if not name or budget is None:
+        return jsonify({'error': 'Missing required fields'}), 400
+    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # Get current budget to calculate difference
+    cursor.execute('SELECT initial_budget, current_budget FROM teams WHERE id = ?', (team_id,))
+    team = cursor.fetchone()
+    
+    if not team:
+        conn.close()
+        return jsonify({'error': 'Team not found'}), 404
+    
+    old_initial_budget = team['initial_budget']
+    old_current_budget = team['current_budget']
+    
+    # Calculate new current budget (maintain the spent amount)
+    spent = old_initial_budget - old_current_budget
+    new_current_budget = budget - spent
+    
+    cursor.execute('''
+        UPDATE teams 
+        SET name = ?, initial_budget = ?, current_budget = ?
+        WHERE id = ?
+    ''', (name, budget, new_current_budget, team_id))
+    
+    conn.commit()
+    conn.close()
+    
+    return jsonify({'message': 'Team updated successfully'}), 200
+
+@app.route('/api/admin/teams/<int:team_id>', methods=['DELETE'])
+def delete_team(team_id):
+    """Admin: Delete a team"""
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # Check if team has players
+    cursor.execute('SELECT COUNT(*) FROM players WHERE team_id = ?', (team_id,))
+    player_count = cursor.fetchone()[0]
+    
+    if player_count > 0:
+        conn.close()
+        return jsonify({'error': 'Cannot delete team with players. Remove players first.'}), 400
+    
+    # Delete related auction history
+    cursor.execute('DELETE FROM auction_history WHERE team_id = ?', (team_id,))
+    
+    # Delete team
+    cursor.execute('DELETE FROM teams WHERE id = ?', (team_id,))
+    
+    conn.commit()
+    
+    if cursor.rowcount == 0:
+        conn.close()
+        return jsonify({'error': 'Team not found'}), 404
+    
+    conn.close()
+    return jsonify({'message': 'Team deleted successfully'}), 200
+
+@app.route('/api/admin/auction-history/<int:history_id>', methods=['DELETE'])
+def delete_auction_history(history_id):
+    """Admin: Delete an auction history record"""
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    cursor.execute('DELETE FROM auction_history WHERE id = ?', (history_id,))
+    
+    conn.commit()
+    
+    if cursor.rowcount == 0:
+        conn.close()
+        return jsonify({'error': 'History record not found'}), 404
+    
+    conn.close()
+    return jsonify({'message': 'Auction history deleted successfully'}), 200
+
+@app.route('/api/admin/player/<int:player_id>/release', methods=['POST'])
+def release_player(player_id):
+    """Admin: Release a player from their team"""
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # Get player details
+    cursor.execute('SELECT team_id, sold_price FROM players WHERE id = ?', (player_id,))
+    player = cursor.fetchone()
+    
+    if not player:
+        conn.close()
+        return jsonify({'error': 'Player not found'}), 404
+    
+    if not player['team_id']:
+        conn.close()
+        return jsonify({'error': 'Player is not assigned to any team'}), 400
+    
+    # Refund money to team
+    cursor.execute('''
+        UPDATE teams 
+        SET current_budget = current_budget + ?
+        WHERE id = ?
+    ''', (player['sold_price'], player['team_id']))
+    
+    # Release player
+    cursor.execute('''
+        UPDATE players 
+        SET is_sold = 0, team_id = NULL, sold_price = NULL
+        WHERE id = ?
+    ''', (player_id,))
+    
+    conn.commit()
+    conn.close()
+    
+    return jsonify({'message': 'Player released successfully'}), 200
+
 # ==================== MAIN ====================
 
 if __name__ == '__main__':
