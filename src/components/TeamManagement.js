@@ -40,7 +40,7 @@ const TeamManagement = () => {
     try {
       const response = await fetch(`http://localhost:5000/api/check-team-image/${encodeURIComponent(teamName)}`);
       const data = await response.json();
-      return data.exists ? data.filename : null;
+      return data.exists ? `http://localhost:5000/team-images/${data.filename}` : null;
     } catch (error) {
       console.error('Error checking team image:', error);
       return null;

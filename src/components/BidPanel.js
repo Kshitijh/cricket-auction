@@ -4,6 +4,23 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
   const [selectedTeam, setSelectedTeam] = useState('');
   const [bidAmount, setBidAmount] = useState('');
   const [playerImage, setPlayerImage] = useState(null);
+  const [teamImages, setTeamImages] = useState({});
+
+  useEffect(() => {
+    // Check team images for all teams
+    const fetchTeamImages = async () => {
+      const imageChecks = {};
+      for (const team of teams) {
+        const imageFilename = await checkTeamImage(team.name);
+        if (imageFilename) {
+          imageChecks[team.id] = imageFilename;
+        }
+      }
+      setTeamImages(imageChecks);
+    };
+    
+    fetchTeamImages();
+  }, [teams]);
 
   useEffect(() => {
     // Check if player image exists whenever currentPlayer changes
@@ -28,6 +45,17 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
     
     checkImage();
   }, [currentPlayer]);
+
+  const checkTeamImage = async (teamName) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/check-team-image/${encodeURIComponent(teamName)}`);
+      const data = await response.json();
+      return data.exists ? `http://localhost:5000/team-images/${data.filename}` : null;
+    } catch (error) {
+      console.error('Error checking team image:', error);
+      return null;
+    }
+  };
 
   const formatPrice = (price) => {
     return `₹${(price / 100000).toFixed(1)}L`;
@@ -55,6 +83,10 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
     } else {
       alert('Please select a team!');
     }
+  };
+
+  const handleTeamSelect = (teamId) => {
+    setSelectedTeam(teamId.toString());
   };
 
   const handleUnsold = () => {
@@ -110,20 +142,34 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
 
         <div className="bid-controls">
           <div className="form-group">
-            <label htmlFor="team-select">Team Name:</label>
-            <select 
-              id="team-select"
-              value={selectedTeam} 
-              onChange={(e) => setSelectedTeam(e.target.value)}
-              className="team-select"
-            >
-              <option value="">Select Team</option>
+            <label>Select Team:</label>
+            <div className="team-buttons-grid">
               {teams.map(team => (
-                <option key={team.id} value={team.id}>
-                  {team.name} (Budget: {formatPrice(team.budget)})
-                </option>
+                <button
+                  key={team.id}
+                  type="button"
+                  className={`team-button ${selectedTeam === team.id.toString() ? 'selected' : ''}`}
+                  onClick={() => handleTeamSelect(team.id)}
+                  title={`${team.name} - Budget: ${formatPrice(team.budget)}`}
+                >
+                  {teamImages[team.id] ? (
+                    <img 
+                      src={`http://localhost:5000/player-images/${teamImages[team.id]}`} 
+                      alt={team.name}
+                      className="team-button-logo"
+                    />
+                  ) : (
+                    <div className="team-button-logo placeholder">
+                      🏆
+                    </div>
+                  )}
+                  <div className="team-button-info">
+                    <span className="team-button-name">{team.name}</span>
+                    <span className="team-button-budget">{formatPrice(team.budget)}</span>
+                  </div>
+                </button>
               ))}
-            </select>
+            </div>
           </div>
 
           <div className="form-group">

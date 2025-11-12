@@ -13,12 +13,15 @@ DATABASE = 'data.db'
 
 # File upload configuration
 UPLOAD_FOLDER = 'public/player-images'
+TEAM_UPLOAD_FOLDER = 'public/team-images'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['TEAM_UPLOAD_FOLDER'] = TEAM_UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5MB max file size
 
-# Create upload folder if it doesn't exist
+# Create upload folders if they don't exist
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+os.makedirs(TEAM_UPLOAD_FOLDER, exist_ok=True)
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -650,7 +653,7 @@ def upload_team_image():
         safe_name = secure_filename(team_name.lower().replace(' ', '_'))
         filename = f"team_{safe_name}{ext}"
         
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        filepath = os.path.join(app.config['TEAM_UPLOAD_FOLDER'], filename)
         file.save(filepath)
         
         return jsonify({
@@ -668,11 +671,16 @@ def check_team_image(team_name):
     # Check for common image extensions with 'team_' prefix
     for ext in ['.jpg', '.jpeg', '.png', '.gif', '.webp']:
         filename = f"team_{safe_name}{ext}"
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        filepath = os.path.join(app.config['TEAM_UPLOAD_FOLDER'], filename)
         if os.path.exists(filepath):
             return jsonify({'exists': True, 'filename': filename}), 200
     
     return jsonify({'exists': False, 'filename': None}), 200
+
+@app.route('/team-images/<filename>')
+def serve_team_image(filename):
+    """Serve team logo/image files"""
+    return send_from_directory(app.config['TEAM_UPLOAD_FOLDER'], filename)
 
 # ==================== MAIN ====================
 
