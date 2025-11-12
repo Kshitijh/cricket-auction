@@ -4,6 +4,9 @@ const TeamManagement = () => {
   const [teams, setTeams] = useState([]);
   const [editingTeam, setEditingTeam] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [teamImages, setTeamImages] = useState({});
   const [formData, setFormData] = useState({
     name: '',
     budget: 10000000
@@ -18,8 +21,84 @@ const TeamManagement = () => {
       const response = await fetch('http://localhost:5000/api/teams');
       const data = await response.json();
       setTeams(data);
+      
+      // Check images for all teams
+      const imageChecks = {};
+      for (const team of data) {
+        const imageFilename = await checkTeamImage(team.name);
+        if (imageFilename) {
+          imageChecks[team.id] = imageFilename;
+        }
+      }
+      setTeamImages(imageChecks);
     } catch (error) {
       console.error('Error fetching teams:', error);
+    }
+  };
+
+  const checkTeamImage = async (teamName) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/check-team-image/${encodeURIComponent(teamName)}`);
+      const data = await response.json();
+      return data.exists ? data.filename : null;
+    } catch (error) {
+      console.error('Error checking team image:', error);
+      return null;
+    }
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Validate file size (5MB max)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('Image size should be less than 5MB');
+        return;
+      }
+      
+      // Validate file type
+      const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/webp'];
+      if (!allowedTypes.includes(file.type)) {
+        alert('Only PNG, JPG, JPEG, GIF, and WEBP images are allowed');
+        return;
+      }
+
+      setSelectedImage(file);
+      
+      // Create preview
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const uploadTeamImage = async () => {
+    if (!selectedImage || !formData.name) return null;
+
+    const uploadFormData = new FormData();
+    uploadFormData.append('image', selectedImage);
+    uploadFormData.append('teamName', formData.name);
+
+    try {
+      const response = await fetch('http://localhost:5000/api/admin/upload-team-image', {
+        method: 'POST',
+        body: uploadFormData
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        return data.filename;
+      } else {
+        const error = await response.json();
+        alert('Error uploading image: ' + error.error);
+        return null;
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      alert('Error uploading image');
+      return null;
     }
   };
 
@@ -35,6 +114,14 @@ const TeamManagement = () => {
     e.preventDefault();
     
     try {
+      // Upload image first if selected
+      if (selectedImage) {
+        const uploaded = await uploadTeamImage();
+        if (!uploaded && selectedImage) {
+          return; // Stop if image upload failed
+        }
+      }
+
       const response = await fetch('http://localhost:5000/api/admin/teams', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -45,6 +132,8 @@ const TeamManagement = () => {
         alert('Team added successfully!');
         setShowAddForm(false);
         setFormData({ name: '', budget: 10000000 });
+        setSelectedImage(null);
+        setImagePreview(null);
         fetchTeams();
       } else {
         const error = await response.json();
@@ -60,6 +149,14 @@ const TeamManagement = () => {
     e.preventDefault();
     
     try {
+      // Upload new image if selected
+      if (selectedImage) {
+        const uploaded = await uploadTeamImage();
+        if (!uploaded && selectedImage) {
+          return; // Stop if image upload failed
+        }
+      }
+
       const response = await fetch(`http://localhost:5000/api/admin/teams/${editingTeam.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -70,6 +167,8 @@ const TeamManagement = () => {
         alert('Team updated successfully!');
         setEditingTeam(null);
         setFormData({ name: '', budget: 10000000 });
+        setSelectedImage(null);
+        setImagePreview(null);
         fetchTeams();
       } else {
         const error = await response.json();
@@ -102,12 +201,22 @@ const TeamManagement = () => {
     }
   };
 
-  const startEdit = (team) => {
+  const startEdit = async (team) => {
     setEditingTeam(team);
     setFormData({
       name: team.name,
       budget: team.initial_budget
     });
+    setSelectedImage(null);
+    
+    // Check if team has an image
+    const imageFilename = await checkTeamImage(team.name);
+    if (imageFilename) {
+      setImagePreview(`http://localhost:5000/player-images/${imageFilename}`);
+    } else {
+      setImagePreview(null);
+    }
+    
     setShowAddForm(false);
   };
 
@@ -115,6 +224,8 @@ const TeamManagement = () => {
     setEditingTeam(null);
     setShowAddForm(false);
     setFormData({ name: '', budget: 10000000 });
+    setSelectedImage(null);
+    setImagePreview(null);
   };
 
   const formatPrice = (price) => {
@@ -131,6 +242,8 @@ const TeamManagement = () => {
             setShowAddForm(true);
             setEditingTeam(null);
             setFormData({ name: '', budget: 10000000 });
+            setSelectedImage(null);
+            setImagePreview(null);
           }}
         >
           + Add New Team
@@ -141,6 +254,30 @@ const TeamManagement = () => {
         <div className="form-container">
           <h3>{editingTeam ? 'Edit Team' : 'Add New Team'}</h3>
           <form onSubmit={editingTeam ? handleUpdateTeam : handleAddTeam}>
+            <div className="form-row">
+              <div className="form-group full-width">
+                <label>Team Logo/Image</label>
+                <div className="image-upload-container">
+                  {imagePreview && (
+                    <div className="image-preview">
+                      <img src={imagePreview} alt="Preview" />
+                    </div>
+                  )}
+                  <input
+                    type="file"
+                    accept="image/png,image/jpeg,image/jpg,image/gif,image/webp"
+                    onChange={handleImageChange}
+                    id="team-image-upload"
+                    className="file-input"
+                  />
+                  <label htmlFor="team-image-upload" className="file-input-label">
+                    {imagePreview ? 'Change Image' : 'Choose Image'}
+                  </label>
+                  <small>Max 5MB. PNG, JPG, JPEG, GIF, WEBP allowed</small>
+                </div>
+              </div>
+            </div>
+
             <div className="form-row">
               <div className="form-group">
                 <label>Team Name *</label>
@@ -186,7 +323,20 @@ const TeamManagement = () => {
         {teams.map(team => (
           <div key={team.id} className="team-management-card">
             <div className="team-card-header">
-              <h3>{team.name}</h3>
+              <div className="team-header-with-logo">
+                {teamImages[team.id] ? (
+                  <img 
+                    src={`http://localhost:5000/player-images/${teamImages[team.id]}`} 
+                    alt={team.name}
+                    className="team-logo-circle"
+                  />
+                ) : (
+                  <div className="team-logo-circle placeholder">
+                    🏆
+                  </div>
+                )}
+                <h3>{team.name}</h3>
+              </div>
               <div className="team-actions">
                 <button 
                   className="edit-btn-small" 

@@ -1,6 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const TeamList = ({ teams }) => {
+  const [teamImages, setTeamImages] = useState({});
+
+  useEffect(() => {
+    const fetchTeamImages = async () => {
+      const imageChecks = {};
+      for (const team of teams) {
+        const imageFilename = await checkTeamImage(team.name);
+        if (imageFilename) {
+          imageChecks[team.id] = imageFilename;
+        }
+      }
+      setTeamImages(imageChecks);
+    };
+    
+    fetchTeamImages();
+  }, [teams]);
+
+  const checkTeamImage = async (teamName) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/check-team-image/${encodeURIComponent(teamName)}`);
+      const data = await response.json();
+      return data.exists ? data.filename : null;
+    } catch (error) {
+      console.error('Error checking team image:', error);
+      return null;
+    }
+  };
+
   const formatPrice = (price) => {
     return `₹${(price / 100000).toFixed(1)}L`;
   };
@@ -11,7 +39,20 @@ const TeamList = ({ teams }) => {
       {teams.map(team => (
         <div key={team.id} className="team-card">
           <div className="team-header">
-            <h3 className="team-name">{team.name}</h3>
+            <div className="team-name-with-logo">
+              {teamImages[team.id] ? (
+                <img 
+                  src={`http://localhost:5000/player-images/${teamImages[team.id]}`} 
+                  alt={team.name}
+                  className="team-logo-small"
+                />
+              ) : (
+                <div className="team-logo-small placeholder">
+                  🏆
+                </div>
+              )}
+              <h3 className="team-name">{team.name}</h3>
+            </div>
             <p className="team-budget">Budget: {formatPrice(team.budget)}</p>
           </div>
           <div className="team-players">

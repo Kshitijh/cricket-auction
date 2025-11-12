@@ -628,6 +628,52 @@ def check_player_image(player_name):
     
     return jsonify({'exists': False, 'filename': None}), 200
 
+@app.route('/api/admin/upload-team-image', methods=['POST'])
+def upload_team_image():
+    """Admin: Upload team logo/image"""
+    if 'image' not in request.files:
+        return jsonify({'error': 'No image file provided'}), 400
+    
+    if 'teamName' not in request.form:
+        return jsonify({'error': 'Team name is required'}), 400
+    
+    file = request.files['image']
+    team_name = request.form['teamName']
+    
+    if file.filename == '':
+        return jsonify({'error': 'No file selected'}), 400
+    
+    if file and allowed_file(file.filename):
+        # Use team name as filename (sanitized)
+        ext = os.path.splitext(file.filename)[1].lower()
+        # Create a safe filename from team name
+        safe_name = secure_filename(team_name.lower().replace(' ', '_'))
+        filename = f"team_{safe_name}{ext}"
+        
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(filepath)
+        
+        return jsonify({
+            'message': 'Team image uploaded successfully',
+            'filename': filename
+        }), 201
+    
+    return jsonify({'error': 'Invalid file type. Allowed types: png, jpg, jpeg, gif, webp'}), 400
+
+@app.route('/api/check-team-image/<team_name>')
+def check_team_image(team_name):
+    """Check if a team image exists"""
+    safe_name = secure_filename(team_name.lower().replace(' ', '_'))
+    
+    # Check for common image extensions with 'team_' prefix
+    for ext in ['.jpg', '.jpeg', '.png', '.gif', '.webp']:
+        filename = f"team_{safe_name}{ext}"
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        if os.path.exists(filepath):
+            return jsonify({'exists': True, 'filename': filename}), 200
+    
+    return jsonify({'exists': False, 'filename': None}), 200
+
 # ==================== MAIN ====================
 
 if __name__ == '__main__':
