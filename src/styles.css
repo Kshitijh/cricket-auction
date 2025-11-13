@@ -2060,21 +2060,23 @@ body {
 }
 
 .team-logo-circle {
-  width: 6.25vh;
-  height: 6.25vh;
-  border-radius: 30%;
+  width: 7vh;
+  height: 7vh;
+  border-radius: 1.2vh;
   object-fit: cover;
-  border: 2px solid #667eea;
+  border: 0.3vh solid #667eea;
   flex-shrink: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
+  box-shadow: 0 0.2vh 0.8vh rgba(0, 0, 0, 0.15);
 }
 
 .team-logo-circle.placeholder {
   background: linear-gradient(135deg, #ffd32a 0%, #ff9f1a 100%);
+  border-color: #ff9f1a;
 }
 
 .team-card-header h3 {

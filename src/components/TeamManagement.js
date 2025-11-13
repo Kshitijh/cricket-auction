@@ -212,7 +212,7 @@ const TeamManagement = () => {
     // Check if team has an image
     const imageFilename = await checkTeamImage(team.name);
     if (imageFilename) {
-      setImagePreview(`http://localhost:5000/player-images/${imageFilename}`);
+      setImagePreview(imageFilename);
     } else {
       setImagePreview(null);
     }
@@ -326,7 +326,7 @@ const TeamManagement = () => {
               <div className="team-header-with-logo">
                 {teamImages[team.id] ? (
                   <img 
-                    src={`http://localhost:5000/player-images/${teamImages[team.id]}`} 
+                    src={teamImages[team.id]} 
                     alt={team.name}
                     className="team-logo-circle"
                   />
