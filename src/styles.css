@@ -677,20 +677,20 @@ body {
 @media (max-width: 1200px) {
   .auction-title {
     font-size: 2rem;
-    margin-bottom: 20px;
+    margin-bottom: 2vh;
   }
 
   .auction-container {
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 1.5vh;
   }
 
   .left-section, .center-section, .right-section {
-    padding: 15px;
+    padding: 1.5vh;
   }
 
   .player-list, .team-list {
-    max-height: 400px;
+    max-height: 40vh;
   }
 
   .team-buttons-grid {
@@ -706,7 +706,7 @@ body {
   }
 
   .tab-btn {
-    padding: 12px 15px;
+    padding: 1.2vh 1.5vh;
   }
 
   .teams-grid {
@@ -714,7 +714,7 @@ body {
   }
 
   .player-auction-header {
-    gap: 20px;
+    gap: 2vh;
   }
 
   .player-auction-image {
@@ -730,7 +730,7 @@ body {
 /* Tablet Portrait (768px - 992px) */
 @media (max-width: 992px) {
   .cricket-auction, .admin-panel {
-    padding: 15px;
+    padding: 1.5vh;
   }
 
   .auction-title {
@@ -743,7 +743,7 @@ body {
 
   .admin-header {
     flex-direction: column;
-    gap: 15px;
+    gap: 1.5vh;
     text-align: center;
   }
 
@@ -753,7 +753,7 @@ body {
 
   .section-header {
     flex-direction: column;
-    gap: 15px;
+    gap: 1.5vh;
     text-align: center;
   }
 
@@ -771,7 +771,7 @@ body {
   }
 
   .data-table {
-    min-width: 800px;
+    min-width: 80vh;
   }
 
   .player-auction-header {
@@ -801,7 +801,7 @@ body {
   }
 
   .quick-bid-btn {
-    flex: 1 1 calc(50% - 5px);
+    flex: 1 1 calc(50% - 0.5vh);
   }
 
   .action-buttons {
@@ -824,37 +824,37 @@ body {
 /* Mobile Landscape & Small Tablet (576px - 768px) */
 @media (max-width: 768px) {
   .cricket-auction, .admin-panel {
-    padding: 10px;
+    padding: 1vh;
   }
 
   .auction-title {
     font-size: 1.5rem;
-    margin-bottom: 15px;
+    margin-bottom: 1.5vh;
   }
 
   .left-section, .center-section, .right-section {
-    padding: 12px;
-    border-radius: 10px;
+    padding: 1.2vh;
+    border-radius: 1vh;
   }
 
   .left-section h2, .right-section h2 {
     font-size: 1.2rem;
-    margin-bottom: 15px;
+    margin-bottom: 1.5vh;
   }
 
   .player-card {
-    padding: 12px;
+    padding: 1.2vh;
   }
 
   .player-header {
-    gap: 10px;
+    gap: 1vh;
   }
 
   .player-profile-circle {
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-    border-width: 2px;
+    width: 5vh;
+    height: 5vh;
+    font-size: 2.4vh;
+    border-width: 0.2vh;
   }
 
   .player-name {
@@ -866,22 +866,22 @@ body {
   }
 
   .start-bid-btn {
-    padding: 8px;
+    padding: 0.8vh;
     font-size: 0.9rem;
   }
 
   .current-auction h2 {
     font-size: 1.4rem;
-    margin-bottom: 15px;
+    margin-bottom: 1.5vh;
   }
 
   .player-details {
-    padding: 20px;
+    padding: 2vh;
   }
 
   .player-auction-image {
-    width: 100px;
-    height: 100px;
+    width: 10vh;
+    height: 10vh;
   }
 
   .player-name-big {
@@ -898,7 +898,7 @@ body {
 
   .current-bid-display {
     flex-direction: column;
-    gap: 8px;
+    gap: 0.8vh;
   }
 
   .current-bid-display .label {
@@ -910,14 +910,14 @@ body {
   }
 
   .team-button {
-    padding: 10px;
-    gap: 10px;
+    padding: 1vh;
+    gap: 1vh;
   }
 
   .team-button-logo {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
+    width: 4vh;
+    height: 4vh;
+    font-size: 2.4vh;
   }
 
   .team-button-name {
@@ -929,7 +929,7 @@ body {
   }
 
   .team-select, .bid-input {
-    padding: 10px;
+    padding: 1vh;
     font-size: 0.95rem;
   }
 
@@ -938,17 +938,17 @@ body {
   }
 
   .bid-btn, .sold-btn, .unsold-btn {
-    padding: 12px;
+    padding: 1.2vh;
     font-size: 1rem;
   }
 
   .team-card {
-    padding: 12px;
+    padding: 1.2vh;
   }
 
   .team-logo-small {
-    width: 50px;
-    height: 50px;
+    width: 5vh;
+    height: 5vh;
   }
 
   .team-name {
@@ -980,7 +980,7 @@ body {
   }
 
   .form-container {
-    padding: 20px;
+    padding: 2vh;
   }
 
   .form-container h3 {
@@ -988,22 +988,22 @@ body {
   }
 
   .form-group input, .form-group select {
-    padding: 10px;
+    padding: 1vh;
     font-size: 0.95rem;
   }
 
   .submit-btn, .cancel-btn {
-    padding: 10px 20px;
+    padding: 1vh 2vh;
     font-size: 0.95rem;
   }
 
   .team-management-card {
-    padding: 15px;
+    padding: 1.5vh;
   }
 
   .team-logo-circle {
-    width: 50px;
-    height: 50px;
+    width: 5vh;
+    height: 5vh;
   }
 
   .team-card-header h3 {
@@ -1022,85 +1022,85 @@ body {
 /* Mobile Portrait (320px - 576px) */
 @media (max-width: 576px) {
   .cricket-auction, .admin-panel {
-    padding: 8px;
+    padding: 0.8vh;
   }
 
   .auction-title {
     font-size: 1.3rem;
-    margin-bottom: 12px;
+    margin-bottom: 1.2vh;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
   }
 
   .auction-container {
-    gap: 10px;
+    gap: 1vh;
   }
 
   .left-section, .center-section, .right-section {
-    padding: 10px;
-    border-radius: 8px;
+    padding: 1vh;
+    border-radius: 0.8vh;
   }
 
   .left-section h2, .right-section h2 {
     font-size: 1.1rem;
-    margin-bottom: 12px;
-    padding-bottom: 8px;
+    margin-bottom: 1.2vh;
+    padding-bottom: 0.8vh;
   }
 
   .player-card {
-    padding: 10px;
+    padding: 1vh;
   }
 
   .player-header {
-    gap: 8px;
-    margin-bottom: 10px;
+    gap: 0.8vh;
+    margin-bottom: 1vh;
   }
 
   .player-profile-circle {
-    width: 45px;
-    height: 45px;
-    font-size: 20px;
-    border-width: 2px;
+    width: 4.5vh;
+    height: 4.5vh;
+    font-size: 2vh;
+    border-width: 0.2vh;
   }
 
   .player-name {
     font-size: 1rem;
-    margin-bottom: 5px;
+    margin-bottom: 0.5vh;
   }
 
   .player-role, .player-base-price {
     font-size: 0.8rem;
-    margin: 3px 0;
+    margin: 0.3vh 0;
   }
 
   .start-bid-btn {
-    padding: 8px;
+    padding: 0.8vh;
     font-size: 0.85rem;
   }
 
   .current-auction h2 {
     font-size: 1.2rem;
-    margin-bottom: 12px;
-    padding-bottom: 8px;
+    margin-bottom: 1.2vh;
+    padding-bottom: 0.8vh;
   }
 
   .player-details {
-    padding: 15px;
-    margin-bottom: 20px;
+    padding: 1.5vh;
+    margin-bottom: 2vh;
   }
 
   .player-auction-header {
-    gap: 15px;
+    gap: 1.5vh;
   }
 
   .player-auction-image {
-    width: 80px;
-    height: 80px;
-    border-width: 3px;
+    width: 8vh;
+    height: 8vh;
+    border-width: 0.3vh;
   }
 
   .player-name-big {
     font-size: 1.2rem;
-    margin-bottom: 5px;
+    margin-bottom: 0.5vh;
   }
 
   .player-role-big {
@@ -1109,12 +1109,12 @@ body {
 
   .base-price {
     font-size: 0.85rem;
-    margin: 8px 0;
+    margin: 0.8vh 0;
   }
 
   .current-bid-display {
-    padding: 12px;
-    margin-top: 15px;
+    padding: 1.2vh;
+    margin-top: 1.5vh;
   }
 
   .current-bid-display .label {
@@ -1126,23 +1126,23 @@ body {
   }
 
   .bid-controls {
-    gap: 15px;
+    gap: 1.5vh;
   }
 
   .team-buttons-grid {
-    gap: 8px;
+    gap: 0.8vh;
   }
 
   .team-button {
-    padding: 8px;
-    gap: 8px;
-    border-width: 2px;
+    padding: 0.8vh;
+    gap: 0.8vh;
+    border-width: 0.2vh;
   }
 
   .team-button-logo {
-    width: 35px;
-    height: 35px;
-    font-size: 18px;
+    width: 3.5vh;
+    height: 3.5vh;
+    font-size: 1.8vh;
   }
 
   .team-button-name {
@@ -1154,7 +1154,7 @@ body {
   }
 
   .team-select, .bid-input {
-    padding: 8px;
+    padding: 0.8vh;
     font-size: 0.9rem;
   }
 
@@ -1163,41 +1163,41 @@ body {
   }
 
   .quick-bids {
-    gap: 8px;
+    gap: 0.8vh;
   }
 
   .quick-bid-btn {
-    padding: 8px;
+    padding: 0.8vh;
     font-size: 0.9rem;
   }
 
   .action-buttons {
-    gap: 8px;
-    margin-top: 8px;
+    gap: 0.8vh;
+    margin-top: 0.8vh;
   }
 
   .bid-btn, .sold-btn, .unsold-btn {
-    padding: 10px;
+    padding: 1vh;
     font-size: 0.95rem;
   }
 
   .team-card {
-    padding: 10px;
-    margin-bottom: 12px;
+    padding: 1vh;
+    margin-bottom: 1.2vh;
   }
 
   .team-header {
-    padding-bottom: 8px;
-    margin-bottom: 8px;
+    padding-bottom: 0.8vh;
+    margin-bottom: 0.8vh;
   }
 
   .team-name-with-logo {
-    gap: 8px;
+    gap: 0.8vh;
   }
 
   .team-logo-small {
-    width: 40px;
-    height: 40px;
+    width: 4vh;
+    height: 4vh;
   }
 
   .team-name {
@@ -1210,12 +1210,12 @@ body {
 
   .player-count {
     font-size: 0.85rem;
-    margin-bottom: 8px;
+    margin-bottom: 0.8vh;
   }
 
   .player-item {
-    padding: 6px 8px;
-    margin-bottom: 6px;
+    padding: 0.6vh 0.8vh;
+    margin-bottom: 0.6vh;
   }
 
   .player-name-small, .player-price {
@@ -1223,20 +1223,20 @@ body {
   }
 
   .no-players {
-    padding: 15px;
+    padding: 1.5vh;
     font-size: 0.9rem;
   }
 
   .admin-toggle-btn {
-    top: 10px;
-    right: 10px;
-    padding: 8px 12px;
+    top: 1vh;
+    right: 1vh;
+    padding: 0.8vh 1.2vh;
     font-size: 0.75rem;
   }
 
   .admin-header {
-    padding: 15px;
-    margin-bottom: 20px;
+    padding: 1.5vh;
+    margin-bottom: 2vh;
   }
 
   .admin-header h1 {
@@ -1244,17 +1244,17 @@ body {
   }
 
   .back-btn {
-    padding: 8px 16px;
+    padding: 0.8vh 1.6vh;
     font-size: 0.9rem;
   }
 
   .stats-overview {
-    gap: 15px;
-    margin-bottom: 20px;
+    gap: 1.5vh;
+    margin-bottom: 2vh;
   }
 
   .stat-card {
-    padding: 15px;
+    padding: 1.5vh;
   }
 
   .stat-card h3 {
@@ -1270,22 +1270,22 @@ body {
   }
 
   .reset-btn {
-    padding: 10px 20px;
+    padding: 1vh 2vh;
     font-size: 0.9rem;
   }
 
   .admin-tabs {
-    padding: 8px;
-    gap: 8px;
+    padding: 0.8vh;
+    gap: 0.8vh;
   }
 
   .tab-btn {
-    padding: 10px 12px;
+    padding: 1vh 1.2vh;
     font-size: 0.85rem;
   }
 
   .admin-content {
-    padding: 15px;
+    padding: 1.5vh;
   }
 
   .section-header h2 {
@@ -1297,26 +1297,26 @@ body {
   }
 
   .add-btn {
-    padding: 10px 20px;
+    padding: 1vh 2vh;
     font-size: 0.9rem;
   }
 
   .form-container {
-    padding: 15px;
+    padding: 1.5vh;
   }
 
   .form-container h3 {
     font-size: 1.1rem;
-    margin-bottom: 15px;
+    margin-bottom: 1.5vh;
   }
 
   .form-row {
-    gap: 15px;
-    margin-bottom: 15px;
+    gap: 1.5vh;
+    margin-bottom: 1.5vh;
   }
 
   .form-group input, .form-group select {
-    padding: 8px;
+    padding: 0.8vh;
     font-size: 0.9rem;
   }
 
@@ -1325,23 +1325,23 @@ body {
   }
 
   .image-preview {
-    width: 120px;
-    height: 120px;
-    border-width: 3px;
+    width: 12vh;
+    height: 12vh;
+    border-width: 0.3vh;
   }
 
   .file-input-label {
-    padding: 10px 20px;
+    padding: 1vh 2vh;
     font-size: 0.9rem;
   }
 
   .form-actions {
-    gap: 10px;
-    margin-top: 15px;
+    gap: 1vh;
+    margin-top: 1.5vh;
   }
 
   .submit-btn, .cancel-btn {
-    padding: 10px 20px;
+    padding: 1vh 2vh;
     font-size: 0.9rem;
   }
 
@@ -1351,42 +1351,42 @@ body {
   }
 
   .data-table th {
-    padding: 10px;
+    padding: 1vh;
     font-size: 0.75rem;
   }
 
   .data-table td {
-    padding: 8px 10px;
+    padding: 0.8vh 1vh;
   }
 
   .player-thumbnail, .player-thumbnail-placeholder {
-    width: 35px;
-    height: 35px;
-    font-size: 18px;
+    width: 3.5vh;
+    height: 3.5vh;
+    font-size: 1.8vh;
   }
 
   .status-badge {
-    padding: 4px 8px;
+    padding: 0.4vh 0.8vh;
     font-size: 0.75rem;
   }
 
   .edit-btn-small, .delete-btn-small, .release-btn-small {
-    padding: 5px 8px;
+    padding: 0.5vh 0.8vh;
     font-size: 0.9rem;
   }
 
   .team-management-card {
-    padding: 12px;
+    padding: 1.2vh;
   }
 
   .team-card-header {
-    margin-bottom: 15px;
-    padding-bottom: 12px;
+    margin-bottom: 1.5vh;
+    padding-bottom: 1.2vh;
   }
 
   .team-logo-circle {
-    width: 45px;
-    height: 45px;
+    width: 4.5vh;
+    height: 4.5vh;
   }
 
   .team-card-header h3 {
@@ -1394,11 +1394,11 @@ body {
   }
 
   .team-actions {
-    gap: 6px;
+    gap: 0.6vh;
   }
 
   .budget-item {
-    padding: 8px;
+    padding: 0.8vh;
   }
 
   .budget-item .label {
@@ -1415,13 +1415,13 @@ body {
   }
 
   .player-list-admin {
-    gap: 6px;
+    gap: 0.6vh;
   }
 
   .player-list-admin li {
-    padding: 8px;
+    padding: 0.8vh;
     grid-template-columns: 1.5fr 1fr 1fr;
-    gap: 8px;
+    gap: 0.8vh;
     font-size: 0.85rem;
   }
 
@@ -1434,7 +1434,7 @@ body {
   }
 
   .loading-container, .loading, .no-data {
-    padding: 40px 15px;
+    padding: 4vh 1.5vh;
     font-size: 1rem;
   }
 }
@@ -1450,8 +1450,8 @@ body {
   }
 
   .player-auction-image {
-    width: 70px;
-    height: 70px;
+    width: 7vh;
+    height: 7vh;
   }
 
   .current-bid-display .bid-value {
@@ -1459,13 +1459,13 @@ body {
   }
 
   .team-button {
-    padding: 6px;
+    padding: 0.6vh;
   }
 
   .team-button-logo {
-    width: 30px;
-    height: 30px;
-    font-size: 16px;
+    width: 3vh;
+    height: 3vh;
+    font-size: 1.6vh;
   }
 
   .team-button-name {
@@ -1478,9 +1478,9 @@ body {
   }
 
   .player-thumbnail, .player-thumbnail-placeholder {
-    width: 30px;
-    height: 30px;
-    font-size: 16px;
+    width: 3vh;
+    height: 3vh;
+    font-size: 1.6vh;
   }
 }
 
@@ -1491,21 +1491,21 @@ body {
   }
 
   .player-auction-image {
-    width: 80px;
-    height: 80px;
+    width: 8vh;
+    height: 8vh;
   }
 
   .current-auction h2 {
-    margin-bottom: 10px;
+    margin-bottom: 1vh;
   }
 
   .player-details {
-    padding: 15px;
-    margin-bottom: 15px;
+    padding: 1.5vh;
+    margin-bottom: 1.5vh;
   }
 
   .bid-controls {
-    gap: 10px;
+    gap: 1vh;
   }
 }
 
@@ -1553,14 +1553,14 @@ body {
 
 .admin-toggle-btn {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 5px 10px;
+  top: 2vh;
+  right: 2vh;
+  padding: 0.5vh 1vh;
   background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
   color: white;
   border: none;
-  border-radius: 10px;
-  font-size: 12px;
+  border-radius: 1vh;
+  font-size: 1.2vh;
   font-weight: bold;
   cursor: pointer;
 }
@@ -1573,18 +1573,18 @@ body {
 .admin-panel {
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  padding: 20px;
+  padding: 2vh;
 }
 
 .admin-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
-  padding: 20px;
+  margin-bottom: 3vh;
+  padding: 2vh;
   background: white;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 1.5vh;
+  box-shadow: 0 0.5vh 1.5vh rgba(0, 0, 0, 0.1);
 }
 
 .admin-header h1 {
@@ -1594,11 +1594,11 @@ body {
 }
 
 .back-btn {
-  padding: 10px 20px;
+  padding: 1vh 2vh;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 0.8vh;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
@@ -1607,26 +1607,26 @@ body {
 
 .back-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 0.5vh 1.5vh rgba(102, 126, 234, 0.4);
 }
 
 .stats-overview {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  margin-bottom: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(20vh, 1fr));
+  gap: 2vh;
+  margin-bottom: 3vh;
 }
 
 .stat-card {
   background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 2vh;
+  border-radius: 1.2vh;
+  box-shadow: 0 0.4vh 1.2vh rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
 .stat-card h3 {
-  margin: 0 0 10px 0;
+  margin: 0 0 1vh 0;
   color: #636e72;
   font-size: 0.9rem;
   text-transform: uppercase;
@@ -1636,13 +1636,13 @@ body {
   font-size: 2rem;
   font-weight: bold;
   color: #2d3436;
-  margin: 10px 0;
+  margin: 1vh 0;
 }
 
 .stat-detail {
   color: #00b894;
   font-size: 1rem;
-  margin-top: 5px;
+  margin-top: 0.5vh;
 }
 
 .reset-card {
@@ -1652,11 +1652,11 @@ body {
 }
 
 .reset-btn {
-  padding: 12px 24px;
+  padding: 1.2vh 2.4vh;
   background: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 0.8vh;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
@@ -1665,26 +1665,26 @@ body {
 
 .reset-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(255, 118, 117, 0.4);
+  box-shadow: 0 0.5vh 1.5vh rgba(255, 118, 117, 0.4);
 }
 
 .admin-tabs {
   display: flex;
-  gap: 10px;
-  margin-bottom: 30px;
+  gap: 1vh;
+  margin-bottom: 3vh;
   background: white;
-  padding: 10px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1vh;
+  border-radius: 1.2vh;
+  box-shadow: 0 0.4vh 1.2vh rgba(0, 0, 0, 0.1);
 }
 
 .tab-btn {
   flex: 1;
-  padding: 15px 20px;
+  padding: 1.5vh 2vh;
   background: transparent;
   color: #636e72;
   border: none;
-  border-radius: 8px;
+  border-radius: 0.8vh;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -1702,9 +1702,9 @@ body {
 
 .admin-content {
   background: white;
-  border-radius: 15px;
-  padding: 30px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 1.5vh;
+  padding: 3vh;
+  box-shadow: 0 0.5vh 1.5vh rgba(0, 0, 0, 0.1);
 }
 
 .management-section {
@@ -1715,9 +1715,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
-  padding-bottom: 15px;
-  border-bottom: 2px solid #dfe6e9;
+  margin-bottom: 2.5vh;
+  padding-bottom: 1.5vh;
+  border-bottom: 0.2vh solid #dfe6e9;
 }
 
 .section-header h2 {
@@ -1729,15 +1729,15 @@ body {
 .subtitle {
   color: #636e72;
   font-size: 0.9rem;
-  margin: 5px 0 0 0;
+  margin: 0.5vh 0 0 0;
 }
 
 .add-btn {
-  padding: 12px 24px;
+  padding: 1.2vh 2.4vh;
   background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 0.8vh;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
@@ -1746,34 +1746,34 @@ body {
 
 .add-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 184, 148, 0.4);
+  box-shadow: 0 0.5vh 1.5vh rgba(0, 184, 148, 0.4);
 }
 
 .form-container {
   background: linear-gradient(135deg, #e0e7ff 0%, #cfd9fe 100%);
-  padding: 25px;
-  border-radius: 12px;
-  margin-bottom: 30px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 2.5vh;
+  border-radius: 1.2vh;
+  margin-bottom: 3vh;
+  box-shadow: 0 0.4vh 1.2vh rgba(0, 0, 0, 0.1);
 }
 
 .form-container h3 {
-  margin: 0 0 20px 0;
+  margin: 0 0 2vh 0;
   color: #2d3436;
   font-size: 1.4rem;
 }
 
 .form-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  margin-bottom: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(25vh, 1fr));
+  gap: 2vh;
+  margin-bottom: 2vh;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.8vh;
 }
 
 .form-group label {
@@ -1784,9 +1784,9 @@ body {
 
 .form-group input,
 .form-group select {
-  padding: 12px;
-  border: 2px solid #dfe6e9;
-  border-radius: 8px;
+  padding: 1.2vh;
+  border: 0.2vh solid #dfe6e9;
+  border-radius: 0.8vh;
   font-size: 1rem;
   background: white;
   transition: all 0.3s ease;
@@ -1837,10 +1837,10 @@ body {
 
 .file-input-label {
   display: inline-block;
-  padding: 12px 24px;
+  padding: 1.2vh 2.4vh;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  border-radius: 8px;
+  border-radius: 0.8vh;
   cursor: pointer;
   transition: all 0.3s ease;
   text-align: center;
@@ -1849,21 +1849,21 @@ body {
 
 .file-input-label:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 0.5vh 1.5vh rgba(102, 126, 234, 0.4);
 }
 
 .form-actions {
   display: flex;
-  gap: 15px;
-  margin-top: 20px;
+  gap: 1.5vh;
+  margin-top: 2vh;
 }
 
 .submit-btn {
-  padding: 12px 30px;
+  padding: 1.2vh 3vh;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 0.8vh;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
@@ -1872,15 +1872,15 @@ body {
 
 .submit-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 0.5vh 1.5vh rgba(102, 126, 234, 0.4);
 }
 
 .cancel-btn {
-  padding: 12px 30px;
+  padding: 1.2vh 3vh;
   background: #95a5a6;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 0.8vh;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
@@ -1893,7 +1893,7 @@ body {
 
 .table-container {
   overflow-x: auto;
-  margin-top: 20px;
+  margin-top: 2vh;
 }
 
 .data-table {
@@ -1908,7 +1908,7 @@ body {
 }
 
 .data-table th {
-  padding: 15px;
+  padding: 1.5vh;
   text-align: left;
   font-weight: 600;
   text-transform: uppercase;
@@ -1917,30 +1917,30 @@ body {
 }
 
 .data-table td {
-  padding: 12px 15px;
-  border-bottom: 1px solid #dfe6e9;
+  padding: 1.2vh 1.5vh;
+  border-bottom: 0.1vh solid #dfe6e9;
   color: #2d3436;
 }
 
 .player-thumbnail {
-  width: 40px;
-  height: 40px;
+  width: 4vh;
+  height: 4vh;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #667eea;
+  border: 0.2vh solid #667eea;
 }
 
 .player-thumbnail-placeholder {
-  width: 40px;
-  height: 40px;
+  width: 4vh;
+  height: 4vh;
   border-radius: 50%;
   background: linear-gradient(135deg, #e0e0e0 0%, #bdbdbd 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 2vh;
   color: white;
-  border: 2px solid #bdbdbd;
+  border: 0.2vh solid #bdbdbd;
 }
 
 .data-table tbody tr:hover {
@@ -1963,8 +1963,8 @@ body {
 }
 
 .status-badge {
-  padding: 6px 12px;
-  border-radius: 20px;
+  padding: 0.6vh 1.2vh;
+  border-radius: 2vh;
   font-size: 0.85rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -1982,16 +1982,16 @@ body {
 
 .actions-col {
   display: flex;
-  gap: 8px;
+  gap: 0.8vh;
   align-items: center;
 }
 
 .edit-btn-small,
 .delete-btn-small,
 .release-btn-small {
-  padding: 6px 10px;
+  padding: 0.6vh 1vh;
   border: none;
-  border-radius: 6px;
+  border-radius: 0.6vh;
   cursor: pointer;
   font-size: 1rem;
   transition: all 0.2s ease;
@@ -2026,37 +2026,37 @@ body {
 
 .teams-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(35vh, 1fr));
+  gap: 2vh;
+  margin-top: 2vh;
 }
 
 .team-management-card {
   background: linear-gradient(135deg, #e0e7ff 0%, #cfd9fe 100%);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 1.2vh;
+  padding: 2vh;
+  box-shadow: 0 0.4vh 1.2vh rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
 .team-management-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0.8vh 2vh rgba(0, 0, 0, 0.15);
 }
 
 .team-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 2px solid #667eea;
+  margin-bottom: 2vh;
+  padding-bottom: 1.5vh;
+  border-bottom: 0.2vh solid #667eea;
 }
 
 .team-header-with-logo {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 1.5vh;
 }
 
 .team-logo-circle {
@@ -2087,28 +2087,28 @@ body {
 
 .team-actions {
   display: flex;
-  gap: 8px;
+  gap: 0.8vh;
 }
 
 .team-card-body {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 2vh;
 }
 
 .budget-info {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 1vh;
 }
 
 .budget-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 1vh;
   background: white;
-  border-radius: 8px;
+  border-radius: 0.8vh;
 }
 
 .budget-item .label {
@@ -2130,7 +2130,7 @@ body {
 }
 
 .players-section h4 {
-  margin: 0 0 10px 0;
+  margin: 0 0 1vh 0;
   color: #2d3436;
   font-size: 1.1rem;
 }
@@ -2141,16 +2141,16 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.8vh;
 }
 
 .player-list-admin li {
   background: white;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 1vh;
+  border-radius: 0.8vh;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  gap: 10px;
+  gap: 1vh;
   align-items: center;
 }
 
@@ -2174,15 +2174,15 @@ body {
   color: #95a5a6;
   font-style: italic;
   text-align: center;
-  padding: 20px;
+  padding: 2vh;
   background: white;
-  border-radius: 8px;
+  border-radius: 0.8vh;
 }
 
 .loading,
 .no-data {
   text-align: center;
-  padding: 60px 20px;
+  padding: 6vh 2vh;
   color: #636e72;
   font-size: 1.2rem;
 }
