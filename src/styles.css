@@ -49,6 +49,7 @@ body {
   background: white;
   border-radius: 4%;
   padding: 2vh;
+  max-height: 85vh;
 }
 
 .left-section h2, .right-section h2 {
@@ -63,7 +64,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1vh;
-  max-height: 80vh;
+  max-height: 75vh;
   overflow-y: auto;
 }
 
@@ -304,7 +305,7 @@ body {
 .bid-controls {
   display: flex;
   flex-direction: column;
-  gap: 2vh;
+  gap: 0.5vh;
 }
 
 .team-buttons-grid {
