@@ -154,7 +154,7 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
                 >
                   {teamImages[team.id] ? (
                     <img 
-                      src={`http://localhost:5000/player-images/${teamImages[team.id]}`} 
+                      src={teamImages[team.id]} 
                       alt={team.name}
                       className="team-button-logo"
                     />

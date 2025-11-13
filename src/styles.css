@@ -28,61 +28,58 @@ body {
 .cricket-auction {
   min-height: 100vh;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 20px;
+  padding: 2vh;
 }
 
 .auction-title {
   text-align: center;
   color: white;
   font-size: 2.5rem;
-  margin-bottom: 30px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1vh;
 }
 
 .auction-container {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  gap: 20px;
-  max-width: 1600px;
+  gap: 1vh;
   margin: 0 auto;
 }
 
 .left-section, .center-section, .right-section {
   background: white;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 4%;
+  padding: 2vh;
 }
 
 .left-section h2, .right-section h2 {
   color: #667eea;
-  margin-bottom: 20px;
+  margin-bottom: 1vh;
   font-size: 1.5rem;
   border-bottom: 2px solid #667eea;
-  padding-bottom: 10px;
+  padding-bottom: 1vh;
 }
 
 .player-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  max-height: 70vh;
+  gap: 1vh;
+  max-height: 80vh;
   overflow-y: auto;
 }
 
 /* Scrollbar styling for player list */
 .player-list::-webkit-scrollbar {
-  width: 8px;
+  width: 1vh;
 }
 
 .player-list::-webkit-scrollbar-track {
   background: #f1f1f1;
-  border-radius: 10px;
+  border-radius: 1vh;
 }
 
 .player-list::-webkit-scrollbar-thumb {
   background: #667eea;
-  border-radius: 10px;
+  border-radius: 1vh;
 }
 
 .player-list::-webkit-scrollbar-thumb:hover {
@@ -95,19 +92,17 @@ body {
 
 .player-card {
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  border-radius: 10px;
-  padding: 15px;
+  border-radius: 1vh;
+  padding: 1vh;
   transition: all 0.3s ease;
-  border: 2px solid transparent;
+  border: 1vh;
 }
 
 .player-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .player-card.current-player {
-  border: 2px solid #ff6b6b;
   background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
   animation: pulse 2s infinite;
 }
@@ -124,13 +119,14 @@ body {
 .player-header {
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 15px;
+  gap: 1vh;
+  margin-bottom: 1vh;
+  max-height: 7vh;
 }
 
 .player-profile-circle {
-  width: 60px;
-  height: 60px;
+  width: 6vh;
+  height: 6vh;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #667eea;
@@ -139,7 +135,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
+  font-size: 3vh;
   color: white;
 }
 
@@ -153,7 +149,7 @@ body {
 }
 
 .player-info {
-  margin-bottom: 15px;
+  margin-bottom: 1vh;
 }
 
 .player-name {
@@ -205,7 +201,6 @@ body {
    ============================================ */
 
 .bid-panel {
-  min-height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -238,18 +233,16 @@ body {
 .player-details {
   text-align: center;
   background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
-  padding: 30px;
-  border-radius: 15px;
-  margin-bottom: 30px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 0.5vh;
+  border-radius: 5%;
+  box-shadow: 0 1vh 1.5vh rgba(0, 0, 0, 0.1);
 }
 
 .player-auction-header {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 30px;
-  margin-bottom: 20px;
+  gap: 3vh;
 }
 
 .player-auction-image {
@@ -257,12 +250,14 @@ body {
   height: 15vh;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid #fff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border: 0.7vh solid #fff;
+  box-shadow: 0 4vh 10vh rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
+  margin-left: 4vh;
+  margin-top: 2vh;
 }
 
 .player-auction-image.placeholder {
@@ -276,31 +271,22 @@ body {
 
 .player-name-big {
   font-size: 2rem;
-  margin: 0 0 10px 0;
+  margin: 0 0 1vh 0;
   color: #2d3436;
 }
 
 .player-role-big {
   font-size: 1.2rem;
   color: #636e72;
-  margin: 5px 0;
+  margin: 0.5vh 0;
 }
 
 .base-price {
   font-size: 1rem;
   color: #00b894;
-  margin: 10px 0;
-}
+  margin: -1vh 0;
+  padding : 1vh;
 
-.current-bid-display {
-  margin-top: 20px;
-  padding: 15px;
-  background: white;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
 }
 
 .current-bid-display .label {
@@ -318,64 +304,78 @@ body {
 .bid-controls {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 2vh;
 }
 
 .team-buttons-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-top: 10px;
+  gap: 1.2vh;
+  margin-top: 1vh;
 }
 
 .team-button {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px;
+  gap: 1.5vh;
+  padding: 1.5vh;
   background: white;
   border: 3px solid transparent;
-  border-radius: 12px;
+  border-radius: 1.2vh;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2vh 8vh rgba(0, 0, 0, 0.1);
 }
 
 .team-button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5vh 15vh rgba(0, 0, 0, 0.2);
   border-color: #667eea;
 }
 
 .team-button.selected {
   border-color: #00b894;
   background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-  box-shadow: 0 0 20px rgba(0, 184, 148, 0.4);
+  box-shadow: 0 0 20vh rgba(0, 184, 148, 0.4);
 }
 
 .team-button-logo {
-  width: 45px;
-  height: 45px;
+  width: 6vh;
+  height: 6vh;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #667eea;
+  border: 3px solid #667eea;
   flex-shrink: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: 28px;
   color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
 .team-button-logo.placeholder {
   background: linear-gradient(135deg, #ffd32a 0%, #ff9f1a 100%);
+  border-color: #ff9f1a;
+}
+
+.team-button:hover .team-button-logo {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.team-button.selected .team-button-logo {
+  border-color: #00b894;
+  border-width: 4px;
+  box-shadow: 0 0 15px rgba(0, 184, 148, 0.5);
 }
 
 .team-button-info {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0.5vh;
   flex: 1;
   text-align: left;
 }
@@ -492,7 +492,7 @@ body {
    ============================================ */
 
 .team-list {
-  max-height: 70vh;
+  max-height: 80vh;
   overflow-y: auto;
 }
 
@@ -656,17 +656,894 @@ body {
    RESPONSIVE DESIGN
    ============================================ */
 
+/* Large Desktop (1600px+) - Default styles above */
+
+/* Desktop (1200px - 1600px) */
+@media (max-width: 1600px) {
+  .auction-title {
+    font-size: 2.2rem;
+  }
+
+  .auction-container {
+    max-width: 1400px;
+  }
+
+  .teams-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+/* Tablet Landscape & Small Desktop (992px - 1200px) */
 @media (max-width: 1200px) {
+  .auction-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
   .auction-container {
     grid-template-columns: 1fr;
+    gap: 15px;
   }
-  
-  .player-list {
-    max-height: 50vh;
+
+  .left-section, .center-section, .right-section {
+    padding: 15px;
+  }
+
+  .player-list, .team-list {
+    max-height: 400px;
   }
 
   .team-buttons-grid {
     grid-template-columns: 1fr;
+  }
+
+  .stats-overview {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .admin-tabs {
+    flex-direction: column;
+  }
+
+  .tab-btn {
+    padding: 12px 15px;
+  }
+
+  .teams-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+
+  .player-auction-header {
+    gap: 20px;
+  }
+
+  .player-auction-image {
+    width: 12vh;
+    height: 12vh;
+  }
+
+  .player-name-big {
+    font-size: 1.8rem;
+  }
+}
+
+/* Tablet Portrait (768px - 992px) */
+@media (max-width: 992px) {
+  .cricket-auction, .admin-panel {
+    padding: 15px;
+  }
+
+  .auction-title {
+    font-size: 1.8rem;
+  }
+
+  .admin-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .admin-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .back-btn {
+    width: 100%;
+  }
+
+  .section-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .add-btn {
+    width: 100%;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .data-table {
+    min-width: 800px;
+  }
+
+  .player-auction-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .player-auction-info {
+    text-align: center;
+  }
+
+  .player-auction-image {
+    width: 15vh;
+    height: 15vh;
+  }
+
+  .player-name-big {
+    font-size: 1.6rem;
+  }
+
+  .player-role-big {
+    font-size: 1.1rem;
+  }
+
+  .quick-bids {
+    flex-wrap: wrap;
+  }
+
+  .quick-bid-btn {
+    flex: 1 1 calc(50% - 5px);
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .bid-btn, .sold-btn, .unsold-btn {
+    width: 100%;
+  }
+
+  .teams-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-overview {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile Landscape & Small Tablet (576px - 768px) */
+@media (max-width: 768px) {
+  .cricket-auction, .admin-panel {
+    padding: 10px;
+  }
+
+  .auction-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  .left-section, .center-section, .right-section {
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .left-section h2, .right-section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+
+  .player-card {
+    padding: 12px;
+  }
+
+  .player-header {
+    gap: 10px;
+  }
+
+  .player-profile-circle {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    border-width: 2px;
+  }
+
+  .player-name {
+    font-size: 1.1rem;
+  }
+
+  .player-role, .player-base-price {
+    font-size: 0.85rem;
+  }
+
+  .start-bid-btn {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .current-auction h2 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+  }
+
+  .player-details {
+    padding: 20px;
+  }
+
+  .player-auction-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .player-name-big {
+    font-size: 1.4rem;
+  }
+
+  .player-role-big {
+    font-size: 1rem;
+  }
+
+  .base-price {
+    font-size: 0.9rem;
+  }
+
+  .current-bid-display {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .current-bid-display .label {
+    font-size: 1rem;
+  }
+
+  .current-bid-display .bid-value {
+    font-size: 1.6rem;
+  }
+
+  .team-button {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .team-button-logo {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .team-button-name {
+    font-size: 0.9rem;
+  }
+
+  .team-button-budget {
+    font-size: 0.8rem;
+  }
+
+  .team-select, .bid-input {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .bid-btn, .sold-btn, .unsold-btn {
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  .team-card {
+    padding: 12px;
+  }
+
+  .team-logo-small {
+    width: 50px;
+    height: 50px;
+  }
+
+  .team-name {
+    font-size: 1.1rem;
+  }
+
+  .team-budget {
+    font-size: 0.9rem;
+  }
+
+  .player-item {
+    padding: 6px 10px;
+  }
+
+  .player-name-small, .player-price {
+    font-size: 0.85rem;
+  }
+
+  .admin-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .admin-content {
+    padding: 20px;
+  }
+
+  .section-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .form-container {
+    padding: 20px;
+  }
+
+  .form-container h3 {
+    font-size: 1.2rem;
+  }
+
+  .form-group input, .form-group select {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  .submit-btn, .cancel-btn {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+
+  .team-management-card {
+    padding: 15px;
+  }
+
+  .team-logo-circle {
+    width: 50px;
+    height: 50px;
+  }
+
+  .team-card-header h3 {
+    font-size: 1.2rem;
+  }
+
+  .no-player h2 {
+    font-size: 1.5rem;
+  }
+
+  .no-player p {
+    font-size: 1rem;
+  }
+}
+
+/* Mobile Portrait (320px - 576px) */
+@media (max-width: 576px) {
+  .cricket-auction, .admin-panel {
+    padding: 8px;
+  }
+
+  .auction-title {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .auction-container {
+    gap: 10px;
+  }
+
+  .left-section, .center-section, .right-section {
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .left-section h2, .right-section h2 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+  }
+
+  .player-card {
+    padding: 10px;
+  }
+
+  .player-header {
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .player-profile-circle {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    border-width: 2px;
+  }
+
+  .player-name {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+
+  .player-role, .player-base-price {
+    font-size: 0.8rem;
+    margin: 3px 0;
+  }
+
+  .start-bid-btn {
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+
+  .current-auction h2 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+  }
+
+  .player-details {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .player-auction-header {
+    gap: 15px;
+  }
+
+  .player-auction-image {
+    width: 80px;
+    height: 80px;
+    border-width: 3px;
+  }
+
+  .player-name-big {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+
+  .player-role-big {
+    font-size: 0.9rem;
+  }
+
+  .base-price {
+    font-size: 0.85rem;
+    margin: 8px 0;
+  }
+
+  .current-bid-display {
+    padding: 12px;
+    margin-top: 15px;
+  }
+
+  .current-bid-display .label {
+    font-size: 0.9rem;
+  }
+
+  .current-bid-display .bid-value {
+    font-size: 1.4rem;
+  }
+
+  .bid-controls {
+    gap: 15px;
+  }
+
+  .team-buttons-grid {
+    gap: 8px;
+  }
+
+  .team-button {
+    padding: 8px;
+    gap: 8px;
+    border-width: 2px;
+  }
+
+  .team-button-logo {
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+  }
+
+  .team-button-name {
+    font-size: 0.85rem;
+  }
+
+  .team-button-budget {
+    font-size: 0.75rem;
+  }
+
+  .team-select, .bid-input {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+  }
+
+  .quick-bids {
+    gap: 8px;
+  }
+
+  .quick-bid-btn {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .action-buttons {
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .bid-btn, .sold-btn, .unsold-btn {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  .team-card {
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+
+  .team-header {
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+  }
+
+  .team-name-with-logo {
+    gap: 8px;
+  }
+
+  .team-logo-small {
+    width: 40px;
+    height: 40px;
+  }
+
+  .team-name {
+    font-size: 1rem;
+  }
+
+  .team-budget {
+    font-size: 0.85rem;
+  }
+
+  .player-count {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+  }
+
+  .player-item {
+    padding: 6px 8px;
+    margin-bottom: 6px;
+  }
+
+  .player-name-small, .player-price {
+    font-size: 0.8rem;
+  }
+
+  .no-players {
+    padding: 15px;
+    font-size: 0.9rem;
+  }
+
+  .admin-toggle-btn {
+    top: 10px;
+    right: 10px;
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+
+  .admin-header {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .admin-header h1 {
+    font-size: 1.3rem;
+  }
+
+  .back-btn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  .stats-overview {
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .stat-card {
+    padding: 15px;
+  }
+
+  .stat-card h3 {
+    font-size: 0.8rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .stat-detail {
+    font-size: 0.9rem;
+  }
+
+  .reset-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .admin-tabs {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .tab-btn {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+
+  .admin-content {
+    padding: 15px;
+  }
+
+  .section-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+  }
+
+  .add-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .form-container {
+    padding: 15px;
+  }
+
+  .form-container h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+
+  .form-row {
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+
+  .form-group input, .form-group select {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .form-group small {
+    font-size: 0.85rem;
+  }
+
+  .image-preview {
+    width: 120px;
+    height: 120px;
+    border-width: 3px;
+  }
+
+  .file-input-label {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .form-actions {
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .submit-btn, .cancel-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .data-table {
+    min-width: 700px;
+    font-size: 0.85rem;
+  }
+
+  .data-table th {
+    padding: 10px;
+    font-size: 0.75rem;
+  }
+
+  .data-table td {
+    padding: 8px 10px;
+  }
+
+  .player-thumbnail, .player-thumbnail-placeholder {
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+  }
+
+  .status-badge {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+
+  .edit-btn-small, .delete-btn-small, .release-btn-small {
+    padding: 5px 8px;
+    font-size: 0.9rem;
+  }
+
+  .team-management-card {
+    padding: 12px;
+  }
+
+  .team-card-header {
+    margin-bottom: 15px;
+    padding-bottom: 12px;
+  }
+
+  .team-logo-circle {
+    width: 45px;
+    height: 45px;
+  }
+
+  .team-card-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .team-actions {
+    gap: 6px;
+  }
+
+  .budget-item {
+    padding: 8px;
+  }
+
+  .budget-item .label {
+    font-size: 0.85rem;
+  }
+
+  .budget-item .value {
+    font-size: 0.9rem;
+  }
+
+  .players-section h4 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .player-list-admin {
+    gap: 6px;
+  }
+
+  .player-list-admin li {
+    padding: 8px;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 8px;
+    font-size: 0.85rem;
+  }
+
+  .no-player h2 {
+    font-size: 1.3rem;
+  }
+
+  .no-player p {
+    font-size: 0.9rem;
+  }
+
+  .loading-container, .loading, .no-data {
+    padding: 40px 15px;
+    font-size: 1rem;
+  }
+}
+
+/* Extra Small Mobile (320px and below) */
+@media (max-width: 400px) {
+  .auction-title {
+    font-size: 1.1rem;
+  }
+
+  .player-name-big {
+    font-size: 1.1rem;
+  }
+
+  .player-auction-image {
+    width: 70px;
+    height: 70px;
+  }
+
+  .current-bid-display .bid-value {
+    font-size: 1.2rem;
+  }
+
+  .team-button {
+    padding: 6px;
+  }
+
+  .team-button-logo {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+
+  .team-button-name {
+    font-size: 0.8rem;
+  }
+
+  .data-table {
+    min-width: 600px;
+    font-size: 0.8rem;
+  }
+
+  .player-thumbnail, .player-thumbnail-placeholder {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+}
+
+/* Landscape mode specific adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+  .player-list, .team-list {
+    max-height: 300px;
+  }
+
+  .player-auction-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .current-auction h2 {
+    margin-bottom: 10px;
+  }
+
+  .player-details {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .bid-controls {
+    gap: 10px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .admin-toggle-btn,
+  .back-btn,
+  .add-btn,
+  .edit-btn-small,
+  .delete-btn-small,
+  .release-btn-small,
+  .start-bid-btn,
+  .bid-btn,
+  .sold-btn,
+  .unsold-btn,
+  .quick-bid-btn,
+  .reset-btn,
+  .submit-btn,
+  .cancel-btn,
+  .form-container,
+  .admin-tabs {
+    display: none;
+  }
+
+  .cricket-auction, .admin-panel {
+    background: white;
+  }
+
+  .auction-container {
+    grid-template-columns: 1fr;
+  }
+
+  .left-section, .center-section, .right-section,
+  .team-card, .player-card,
+  .team-management-card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    page-break-inside: avoid;
   }
 }
 
