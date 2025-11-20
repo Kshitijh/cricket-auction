@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import PlayerCard from './PlayerCard';
+import PlayerImageGrid from './PlayerImageGrid';
 import BidPanel from './BidPanel';
-import TeamList from './TeamList';
 
 const API_BASE_URL = 'http://localhost:5000/api';
 
@@ -174,26 +173,16 @@ const CricketAuction = () => {
     <div className="cricket-auction">
       <h1 className="auction-title">🏏 Cricket Player Auction</h1>
       
-      <div className="auction-container">
-        <div className="left-section">
-          <h2>Available Players</h2>
-          {availablePlayers.length === 0 ? (
-            <p className="no-players">All players have been sold or marked as unsold.</p>
-          ) : (
-            <div className="player-list">
-              {availablePlayers.map(player => (
-                <PlayerCard 
-                  key={player.id}
-                  player={player}
-                  onStartAuction={startAuction}
-                  isCurrentPlayer={currentPlayer?.id === player.id}
-                />
-              ))}
-            </div>
-          )}
+      <div className="auction-container-new">
+        <div className="top-section">
+          <PlayerImageGrid 
+            players={availablePlayers}
+            onStartAuction={startAuction}
+            currentPlayerId={currentPlayer?.id}
+          />
         </div>
 
-        <div className="center-section">
+        <div className="bottom-section">
           <BidPanel 
             currentPlayer={currentPlayer}
             currentBid={currentBid}
@@ -202,10 +191,6 @@ const CricketAuction = () => {
             onSold={soldPlayer}
             onUnsold={unsoldPlayer}
           />
-        </div>
-
-        <div className="right-section">
-          <TeamList teams={teams} />
         </div>
       </div>
     </div>
