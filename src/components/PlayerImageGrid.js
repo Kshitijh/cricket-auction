@@ -66,7 +66,6 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId }) => {
               <div className="player-image-info">
                 <h3 className="player-grid-name">{player.name}</h3>
                 <p className="player-grid-role">{player.role}</p>
-                <p className="player-grid-price">{formatPrice(player.basePrice)}</p>
               </div>
             </button>
           ))}
