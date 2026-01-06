@@ -13,7 +13,7 @@ const AdminPanel = ({ onBack }) => {
 
   const fetchStats = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/stats');
+      const response = await fetch('https://cricket-auction-wnqj.onrender.com/api/stats');
       const data = await response.json();
       setStats(data);
     } catch (error) {
@@ -24,7 +24,7 @@ const AdminPanel = ({ onBack }) => {
   const handleReset = async () => {
     if (window.confirm('Are you sure you want to reset the entire auction? This will unsell all players and restore team budgets.')) {
       try {
-        const response = await fetch('http://localhost:5000/api/reset', {
+        const response = await fetch('https://cricket-auction-wnqj.onrender.com/api/reset', {
           method: 'POST'
         });
         

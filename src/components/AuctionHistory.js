@@ -11,7 +11,7 @@ const AuctionHistory = () => {
   const fetchHistory = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/auction/history');
+      const response = await fetch('https://cricket-auction-wnqj.onrender.com/api/auction/history');
       const data = await response.json();
       setHistory(data);
     } catch (error) {
@@ -24,7 +24,7 @@ const AuctionHistory = () => {
   const handleDeleteHistory = async (historyId) => {
     if (window.confirm('Are you sure you want to delete this history record?')) {
       try {
-        const response = await fetch(`http://localhost:5000/api/admin/auction-history/${historyId}`, {
+        const response = await fetch(`https://cricket-auction-wnqj.onrender.com/api/admin/auction-history/${historyId}`, {
           method: 'DELETE'
         });
 
