@@ -65,7 +65,18 @@ const CricketAuction = () => {
   };
 
   const placeBid = async (teamId, playerName, bidValue) => {
+    console.log('placeBid called:', { teamId, playerName, bidValue, currentBid });
     if (currentPlayer && bidValue > currentBid) {
+      // Optimistically update the UI immediately so the Current Bid display reflects the user's action
+      const prevBid = currentBid;
+      setCurrentBid(bidValue);
+
+      // If no team is selected, keep the update local and don't call the backend
+      if (teamId === null || teamId === undefined) {
+        console.log('No team selected — updated locally to', bidValue);
+        return;
+      }
+
       try {
         // Record bid in database
         const response = await fetch(`${API_BASE_URL}/auction/bid`, {
@@ -79,15 +90,21 @@ const CricketAuction = () => {
         });
 
         if (response.ok) {
-          setCurrentBid(bidValue);
+          // success - currentBid already set optimistically
+          console.log('Bid recorded on server');
         } else {
           const error = await response.json();
+          // revert optimistic update on failure
+          setCurrentBid(prevBid);
           alert('Error placing bid: ' + error.error);
         }
       } catch (error) {
         console.error('Error placing bid:', error);
+        setCurrentBid(prevBid);
         alert('Failed to place bid');
       }
+    } else {
+      console.log('placeBid ignored: either no active player or bid not greater than currentBid');
     }
   };
 

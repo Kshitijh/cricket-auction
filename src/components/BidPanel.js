@@ -62,15 +62,24 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
   }; 
 
   const handlePlaceBid = () => {
-    if (selectedTeam && bidAmount && currentPlayer) {
-      const bidValue = parseInt(bidAmount);
-      const teamId = parseInt(selectedTeam);
-      if (bidValue > currentBid) {
-        onPlaceBid(teamId, currentPlayer.name, bidValue);
-        setBidAmount('');
-      } else {
-        alert('Bid must be higher than current bid!');
-      }
+    if (!currentPlayer) return;
+
+    // If the user didn't enter an amount, use a default increment (+100)
+    const bidValue = bidAmount ? parseInt(bidAmount) : (currentBid + 100);
+    const teamId = selectedTeam ? parseInt(selectedTeam) : null;
+
+    console.log('handlePlaceBid:', { selectedTeam, bidAmount, bidValue, currentBid, teamId });
+
+    if (isNaN(bidValue)) {
+      alert('Please enter a valid bid amount');
+      return;
+    }
+
+    if (bidValue > currentBid) {
+      onPlaceBid(teamId, currentPlayer.name, bidValue);
+      setBidAmount('');
+    } else {
+      alert('Bid must be higher than current bid!');
     }
   };
 
@@ -81,7 +90,7 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
       setSelectedTeam('');
       setBidAmount('');
     } else {
-      alert('Please select a team!');
+      alert('Please Select a Team!');
     }
   };
 
