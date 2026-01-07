@@ -27,7 +27,7 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
     const checkImage = async () => {
       if (currentPlayer) {
         try {
-          const response = await fetch(`https://cricket-auction-wnqj.onrender.com/api/check-player-image/${encodeURIComponent(currentPlayer.name)}`);
+          const response = await fetch(`http://localhost:5000/api/check-player-image/${encodeURIComponent(currentPlayer.name)}`);
           const data = await response.json();
           if (data.exists) {
             setPlayerImage(data.filename);
@@ -48,9 +48,9 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
 
   const checkTeamImage = async (teamName) => {
     try {
-      const response = await fetch(`https://cricket-auction-wnqj.onrender.com/api/check-team-image/${encodeURIComponent(teamName)}`);
+      const response = await fetch(`http://localhost:5000/api/check-team-image/${encodeURIComponent(teamName)}`);
       const data = await response.json();
-      return data.exists ? `https://cricket-auction-wnqj.onrender.com/team-images/${data.filename}` : null;
+      return data.exists ? `http://localhost:5000/team-images/${data.filename}` : null;
     } catch (error) {
       console.error('Error checking team image:', error);
       return null;
@@ -119,7 +119,7 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
           <div className="player-auction-header">
             {playerImage ? (
               <img 
-                src={`https://cricket-auction-wnqj.onrender.com/player-images/${playerImage}`} 
+                src={`http://localhost:5000/player-images/${playerImage}`} 
                 alt={currentPlayer.name}
                 className="player-auction-image"
               />

@@ -18,7 +18,7 @@ const TeamManagement = () => {
 
   const fetchTeams = async () => {
     try {
-      const response = await fetch('https://cricket-auction-wnqj.onrender.com/api/teams');
+      const response = await fetch('http://localhost:5000/api/teams');
       const data = await response.json();
       setTeams(data);
       
@@ -38,9 +38,9 @@ const TeamManagement = () => {
 
   const checkTeamImage = async (teamName) => {
     try {
-      const response = await fetch(`https://cricket-auction-wnqj.onrender.com/api/check-team-image/${encodeURIComponent(teamName)}`);
+      const response = await fetch(`http://localhost:5000/api/check-team-image/${encodeURIComponent(teamName)}`);
       const data = await response.json();
-      return data.exists ? `https://cricket-auction-wnqj.onrender.com/team-images/${data.filename}` : null;
+      return data.exists ? `http://localhost:5000/team-images/${data.filename}` : null;
     } catch (error) {
       console.error('Error checking team image:', error);
       return null;
@@ -82,7 +82,7 @@ const TeamManagement = () => {
     uploadFormData.append('teamName', formData.name);
 
     try {
-      const response = await fetch('https://cricket-auction-wnqj.onrender.com/api/admin/upload-team-image', {
+      const response = await fetch('http://localhost:5000/api/admin/upload-team-image', {
         method: 'POST',
         body: uploadFormData
       });
@@ -122,7 +122,7 @@ const TeamManagement = () => {
         }
       }
 
-      const response = await fetch('https://cricket-auction-wnqj.onrender.com/api/admin/teams', {
+      const response = await fetch('http://localhost:5000/api/admin/teams', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -157,7 +157,7 @@ const TeamManagement = () => {
         }
       }
 
-      const response = await fetch(`https://cricket-auction-wnqj.onrender.com/api/admin/teams/${editingTeam.id}`, {
+      const response = await fetch(`http://localhost:5000/api/admin/teams/${editingTeam.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -183,7 +183,7 @@ const TeamManagement = () => {
   const handleDeleteTeam = async (teamId) => {
     if (window.confirm('Are you sure you want to delete this team? This will only work if the team has no players.')) {
       try {
-        const response = await fetch(`https://cricket-auction-wnqj.onrender.com/api/admin/teams/${teamId}`, {
+        const response = await fetch(`http://localhost:5000/api/admin/teams/${teamId}`, {
           method: 'DELETE'
         });
 

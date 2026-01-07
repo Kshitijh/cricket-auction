@@ -20,7 +20,7 @@ const TeamList = ({ teams }) => {
 
   const checkTeamImage = async (teamName) => {
     try {
-      const response = await fetch(`https://cricket-auction-wnqj.onrender.com/api/check-team-image/${encodeURIComponent(teamName)}`);
+      const response = await fetch(`http://localhost:5000/api/check-team-image/${encodeURIComponent(teamName)}`);
       const data = await response.json();
       return data.exists ? data.filename : null;
     } catch (error) {
@@ -42,7 +42,7 @@ const TeamList = ({ teams }) => {
             <div className="team-name-with-logo">
               {teamImages[team.id] ? (
                 <img 
-                  src={`https://cricket-auction-wnqj.onrender.com/team-images/${teamImages[team.id]}`} 
+                  src={`http://localhost:5000/team-images/${teamImages[team.id]}`} 
                   alt={team.name}
                   className="team-logo-small"
                 />

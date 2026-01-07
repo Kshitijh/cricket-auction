@@ -21,7 +21,7 @@ const PlayerManagement = () => {
 
   const fetchPlayers = async () => {
     try {
-      const response = await fetch('https://cricket-auction-wnqj.onrender.com/api/players');
+      const response = await fetch('http://localhost:5000/api/players');
       const data = await response.json();
       setPlayers(data);
       
@@ -41,7 +41,7 @@ const PlayerManagement = () => {
 
   const fetchTeams = async () => {
     try {
-      const response = await fetch('https://cricket-auction-wnqj.onrender.com/api/teams');
+      const response = await fetch('http://localhost:5000/api/teams');
       const data = await response.json();
       setTeams(data);
     } catch (error) {
@@ -92,7 +92,7 @@ const PlayerManagement = () => {
     uploadFormData.append('playerName', formData.name);
 
     try {
-      const response = await fetch('https://cricket-auction-wnqj.onrender.com/api/admin/upload-image', {
+      const response = await fetch('http://localhost:5000/api/admin/upload-image', {
         method: 'POST',
         body: uploadFormData
       });
@@ -114,7 +114,7 @@ const PlayerManagement = () => {
 
   const checkPlayerImage = async (playerName) => {
     try {
-      const response = await fetch(`https://cricket-auction-wnqj.onrender.com/api/check-player-image/${encodeURIComponent(playerName)}`);
+      const response = await fetch(`http://localhost:5000/api/check-player-image/${encodeURIComponent(playerName)}`);
       const data = await response.json();
       return data.exists ? data.filename : null;
     } catch (error) {
@@ -135,7 +135,7 @@ const PlayerManagement = () => {
         }
       }
 
-      const response = await fetch('https://cricket-auction-wnqj.onrender.com/api/admin/players', {
+      const response = await fetch('http://localhost:5000/api/admin/players', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -170,7 +170,7 @@ const PlayerManagement = () => {
         }
       }
 
-      const response = await fetch(`https://cricket-auction-wnqj.onrender.com/api/admin/players/${editingPlayer.id}`, {
+      const response = await fetch(`http://localhost:5000/api/admin/players/${editingPlayer.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -196,7 +196,7 @@ const PlayerManagement = () => {
   const handleDeletePlayer = async (playerId) => {
     if (window.confirm('Are you sure you want to delete this player?')) {
       try {
-        const response = await fetch(`https://cricket-auction-wnqj.onrender.com/api/admin/players/${playerId}`, {
+        const response = await fetch(`http://localhost:5000/api/admin/players/${playerId}`, {
           method: 'DELETE'
         });
 
@@ -217,7 +217,7 @@ const PlayerManagement = () => {
   const handleReleasePlayer = async (playerId) => {
     if (window.confirm('Are you sure you want to release this player from their team?')) {
       try {
-        const response = await fetch(`https://cricket-auction-wnqj.onrender.com/api/admin/player/${playerId}/release`, {
+        const response = await fetch(`http://localhost:5000/api/admin/player/${playerId}/release`, {
           method: 'POST'
         });
 
@@ -248,7 +248,7 @@ const PlayerManagement = () => {
     // Check if player has an image
     const imageFilename = await checkPlayerImage(player.name);
     if (imageFilename) {
-      setImagePreview(`https://cricket-auction-wnqj.onrender.com/player-images/${imageFilename}`);
+      setImagePreview(`http://localhost:5000/player-images/${imageFilename}`);
     } else {
       setImagePreview(null);
     }
@@ -392,7 +392,7 @@ const PlayerManagement = () => {
                 <td>
                   {playerImages[player.id] ? (
                     <img 
-                      src={`https://cricket-auction-wnqj.onrender.com/player-images/${playerImages[player.id]}`} 
+                      src={`http://localhost:5000/player-images/${playerImages[player.id]}`} 
                       alt={player.name}
                       className="player-thumbnail"
                     />

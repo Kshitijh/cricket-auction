@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PlayerImageGrid from './PlayerImageGrid';
 import BidPanel from './BidPanel';
 
-const API_BASE_URL = 'https://cricket-auction-wnqj.onrender.com/api';
+const API_BASE_URL = 'http://localhost:5000/api';
 
 const CricketAuction = () => {
   const [players, setPlayers] = useState([]);

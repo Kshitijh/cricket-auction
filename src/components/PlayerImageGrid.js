@@ -20,9 +20,9 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId }) => {
 
   const checkPlayerImage = async (playerName) => {
     try {
-      const response = await fetch(`https://cricket-auction-wnqj.onrender.com/api/check-player-image/${encodeURIComponent(playerName)}`);
+      const response = await fetch(`http://localhost:5000/api/check-player-image/${encodeURIComponent(playerName)}`);
       const data = await response.json();
-      return data.exists ? `https://cricket-auction-wnqj.onrender.com/player-images/${data.filename}` : null;
+      return data.exists ? `http://localhost:5000/player-images/${data.filename}` : null;
     } catch (error) {
       console.error('Error checking player image:', error);
       return null;
