@@ -43,7 +43,7 @@ const AuctionHistory = () => {
   };
 
   const formatPrice = (price) => {
-    return `₹${(price / 100000).toFixed(1)}L`;
+    return `${price.toLocaleString()} pts`;
   };
 
   const formatDateTime = (datetime) => {

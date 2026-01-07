@@ -21,8 +21,8 @@ const PlayerCard = ({ player, onStartAuction, isCurrentPlayer }) => {
   }, [player.name]);
 
   const formatPrice = (price) => {
-    return `₹${(price / 100000).toFixed(1)}L`;
-  };
+    return `${price.toLocaleString()} pts`;
+  }; 
 
   return (
     <div className={`player-card ${isCurrentPlayer ? 'current-player' : ''}`}>

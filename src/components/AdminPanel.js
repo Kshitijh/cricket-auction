@@ -59,13 +59,13 @@ const AdminPanel = ({ onBack }) => {
           </div>
           <div className="stat-card">
             <h3>Total Spent</h3>
-            <p className="stat-value">₹{(stats.total_spent / 100000).toFixed(1)}L</p>
+            <p className="stat-value">{stats.total_spent} pts</p>
           </div>
           {stats.most_expensive_player && (
             <div className="stat-card">
               <h3>Most Expensive</h3>
               <p className="stat-value">{stats.most_expensive_player.name}</p>
-              <p className="stat-detail">₹{(stats.most_expensive_player.sold_price / 100000).toFixed(1)}L</p>
+              <p className="stat-detail">{stats.most_expensive_player.sold_price} pts</p>
             </div>
           )}
           <div className="stat-card reset-card">

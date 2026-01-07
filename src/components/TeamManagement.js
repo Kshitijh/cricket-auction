@@ -9,7 +9,7 @@ const TeamManagement = () => {
   const [teamImages, setTeamImages] = useState({});
   const [formData, setFormData] = useState({
     name: '',
-    budget: 10000000
+    budget: 10000
   });
 
   useEffect(() => {
@@ -131,7 +131,7 @@ const TeamManagement = () => {
       if (response.ok) {
         alert('Team added successfully!');
         setShowAddForm(false);
-        setFormData({ name: '', budget: 10000000 });
+        setFormData({ name: '', budget: 10000 });
         setSelectedImage(null);
         setImagePreview(null);
         fetchTeams();
@@ -166,7 +166,7 @@ const TeamManagement = () => {
       if (response.ok) {
         alert('Team updated successfully!');
         setEditingTeam(null);
-        setFormData({ name: '', budget: 10000000 });
+        setFormData({ name: '', budget: 10000 });
         setSelectedImage(null);
         setImagePreview(null);
         fetchTeams();
@@ -223,14 +223,14 @@ const TeamManagement = () => {
   const cancelEdit = () => {
     setEditingTeam(null);
     setShowAddForm(false);
-    setFormData({ name: '', budget: 10000000 });
+    setFormData({ name: '', budget: 10000 });
     setSelectedImage(null);
     setImagePreview(null);
-  };
+  }; 
 
   const formatPrice = (price) => {
-    return `₹${(price / 100000).toFixed(1)}L`;
-  };
+    return `${price.toLocaleString()} pts`;
+  }; 
 
   return (
     <div className="management-section">
@@ -241,10 +241,10 @@ const TeamManagement = () => {
           onClick={() => {
             setShowAddForm(true);
             setEditingTeam(null);
-            setFormData({ name: '', budget: 10000000 });
+            setFormData({ name: '', budget: 10000 });
             setSelectedImage(null);
             setImagePreview(null);
-          }}
+          }} 
         >
           + Add New Team
         </button>
@@ -300,8 +300,8 @@ const TeamManagement = () => {
                   onChange={handleInputChange}
                   required
                   min="0"
-                  step="100000"
-                  placeholder="Enter budget"
+                  step="1"
+                  placeholder="Enter budget (points)"
                 />
                 <small>{formatPrice(formData.budget)}</small>
               </div>

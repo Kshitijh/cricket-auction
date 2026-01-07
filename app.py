@@ -90,23 +90,13 @@ def seed_initial_data():
     if cursor.fetchone()[0] == 0:
         # Insert teams
         teams = [
-            ('Mumbai Indians', 10000000, 10000000),
-            ('Chennai Super Kings', 10000000, 10000000),
-            ('Royal Challengers', 10000000, 10000000),
-            ('Kolkata Knight Riders', 10000000, 10000000)
+            ('DemoTeam1', 10000, 10000)
         ]
         cursor.executemany('INSERT INTO teams (name, initial_budget, current_budget) VALUES (?, ?, ?)', teams)
         
         # Insert players
         players = [
-            ('Virat Kohli', 'Batsman', 2000000),
-            ('Rohit Sharma', 'Batsman', 2000000),
-            ('Jasprit Bumrah', 'Bowler', 2000000),
-            ('MS Dhoni', 'Wicket-Keeper', 2000000),
-            ('Hardik Pandya', 'All-Rounder', 1500000),
-            ('Ravindra Jadeja', 'All-Rounder', 1500000),
-            ('KL Rahul', 'Batsman', 1500000),
-            ('Mohammed Shami', 'Bowler', 1500000)
+            ('DemoPlayer1', 'Batsman', 100)
         ]
         cursor.executemany('INSERT INTO players (name, role, base_price) VALUES (?, ?, ?)', players)
         
@@ -432,7 +422,7 @@ def add_team():
     """Admin: Add a new team"""
     data = request.json
     name = data.get('name')
-    budget = data.get('budget', 10000000)  # Default 100L
+    budget = data.get('budget', 10000)  # Default 10,000 points
     
     if not name:
         return jsonify({'error': 'Team name is required'}), 400
@@ -681,6 +671,70 @@ def check_team_image(team_name):
 def serve_team_image(filename):
     """Serve team logo/image files"""
     return send_from_directory(app.config['TEAM_UPLOAD_FOLDER'], filename)
+
+@app.route('/api/admin/migrate-to-points', methods=['POST'])
+def migrate_to_points():
+    """Migrate existing numeric currency values to the points system.
+
+    - Sets all players' base_price to 100 pts
+    - Scales team budgets (initial and current) to 10,000 pts while preserving spent amounts
+    - Scales sold_price for players assigned to teams proportionally
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    try:
+        # 1) Set all players' base_price to 100
+        cursor.execute('UPDATE players SET base_price = 100 WHERE base_price != 100')
+        players_bp_updated = cursor.rowcount
+
+        # 2) For each team, compute scale factor and update budgets and sold prices
+        cursor.execute('SELECT id, initial_budget, current_budget FROM teams')
+        teams = cursor.fetchall()
+        teams_updated = 0
+        players_sold_prices_updated = 0
+
+        for team in teams:
+            team_id = team['id']
+            old_initial = team['initial_budget']
+            old_current = team['current_budget']
+
+            # If old_initial is zero or already 10000, still normalize current budget
+            if old_initial and old_initial != 10000:
+                scale = 10000 / old_initial
+                spent_old = old_initial - old_current
+                new_spent = round(spent_old * scale)
+                new_current = max(0, 10000 - new_spent)
+
+                cursor.execute('UPDATE teams SET initial_budget = ?, current_budget = ? WHERE id = ?', (10000, new_current, team_id))
+                teams_updated += 1
+
+                # Update sold_price for players of this team
+                cursor.execute('SELECT id, sold_price FROM players WHERE team_id = ? AND sold_price IS NOT NULL', (team_id,))
+                sold_players = cursor.fetchall()
+                for p in sold_players:
+                    new_sold = round(p['sold_price'] * scale)
+                    cursor.execute('UPDATE players SET sold_price = ? WHERE id = ?', (new_sold, p['id']))
+                    players_sold_prices_updated += 1
+            else:
+                # Normalize initial budget to 10000 and adjust current budget if necessary
+                spent_old = (old_initial or 0) - (old_current or 0)
+                new_current = max(0, 10000 - spent_old)
+                cursor.execute('UPDATE teams SET initial_budget = ?, current_budget = ? WHERE id = ?', (10000, new_current, team_id))
+                teams_updated += 1
+
+        conn.commit()
+
+        return jsonify({
+            'message': 'Migration completed',
+            'players_base_price_updated': players_bp_updated,
+            'teams_updated': teams_updated,
+            'players_sold_prices_updated': players_sold_prices_updated
+        }), 200
+    except Exception as e:
+        conn.rollback()
+        return jsonify({'error': str(e)}), 500
+    finally:
+        conn.close()
 
 # ==================== MAIN ====================
 

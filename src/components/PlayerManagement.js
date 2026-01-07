@@ -11,7 +11,7 @@ const PlayerManagement = () => {
   const [formData, setFormData] = useState({
     name: '',
     role: 'Batsman',
-    base_price: 1000000
+    base_price: 100
   });
 
   useEffect(() => {
@@ -144,7 +144,7 @@ const PlayerManagement = () => {
       if (response.ok) {
         alert('Player added successfully!');
         setShowAddForm(false);
-        setFormData({ name: '', role: 'Batsman', base_price: 1000000 });
+        setFormData({ name: '', role: 'Batsman', base_price: 100 });
         setSelectedImage(null);
         setImagePreview(null);
         fetchPlayers();
@@ -179,7 +179,7 @@ const PlayerManagement = () => {
       if (response.ok) {
         alert('Player updated successfully!');
         setEditingPlayer(null);
-        setFormData({ name: '', role: 'Batsman', base_price: 1000000 });
+        setFormData({ name: '', role: 'Batsman', base_price: 100 });
         setSelectedImage(null);
         setImagePreview(null);
         fetchPlayers();
@@ -259,14 +259,14 @@ const PlayerManagement = () => {
   const cancelEdit = () => {
     setEditingPlayer(null);
     setShowAddForm(false);
-    setFormData({ name: '', role: 'Batsman', base_price: 1000000 });
+    setFormData({ name: '', role: 'Batsman', base_price: 100 });
     setSelectedImage(null);
     setImagePreview(null);
-  };
+  }; 
 
   const formatPrice = (price) => {
-    return `₹${(price / 100000).toFixed(1)}L`;
-  };
+    return `${price.toLocaleString()} pts`;
+  }; 
 
   const getTeamName = (teamId) => {
     const team = teams.find(t => t.id === teamId);
@@ -282,10 +282,10 @@ const PlayerManagement = () => {
           onClick={() => {
             setShowAddForm(true);
             setEditingPlayer(null);
-            setFormData({ name: '', role: 'Batsman', base_price: 1000000 });
+            setFormData({ name: '', role: 'Batsman', base_price: 100 });
             setSelectedImage(null);
             setImagePreview(null);
-          }}
+          }} 
         >
           + Add New Player
         </button>
@@ -351,8 +351,8 @@ const PlayerManagement = () => {
                   onChange={handleInputChange}
                   required
                   min="0"
-                  step="100000"
-                  placeholder="Enter base price"
+                  step="1"
+                  placeholder="Enter base price (points)"
                 />
                 <small>{formatPrice(formData.base_price)}</small>
               </div>

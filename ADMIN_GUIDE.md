@@ -133,7 +133,7 @@ POST /api/admin/teams
 Content-Type: application/json
 {
   "name": "Team Name",
-  "budget": 10000000
+  "budget": 10000
 }
 ```
 

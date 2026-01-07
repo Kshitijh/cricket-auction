@@ -58,8 +58,8 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
   };
 
   const formatPrice = (price) => {
-    return `₹${(price / 100000).toFixed(1)}L`;
-  };
+    return `${price.toLocaleString()} pts`;
+  }; 
 
   const handlePlaceBid = () => {
     if (selectedTeam && bidAmount && currentPlayer) {
@@ -185,9 +185,9 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
           </div>
 
           <div className="quick-bids">
-            <button onClick={() => incrementBid(100000)} className="quick-bid-btn">+1L</button>
-            <button onClick={() => incrementBid(500000)} className="quick-bid-btn">+5L</button>
-            <button onClick={() => incrementBid(1000000)} className="quick-bid-btn">+10L</button>
+            <button onClick={() => incrementBid(100)} className="quick-bid-btn">+100</button>
+            <button onClick={() => incrementBid(500)} className="quick-bid-btn">+500</button>
+            <button onClick={() => incrementBid(1000)} className="quick-bid-btn">+1000</button>
           </div>
 
           <div className="action-buttons">
