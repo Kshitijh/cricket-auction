@@ -44,6 +44,22 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId }) => {
     } else {
       alert('Player not found');
     }
+  };
+
+  const handleRandomPlayer = () => {
+    if (!players || players.length === 0) {
+      alert('No available players to select');
+      return;
+    }
+
+    // Pick a random available player
+    const idx = Math.floor(Math.random() * players.length);
+    const randomPlayer = players[idx];
+
+    // Clear inputs and start auction
+    setJerseyQuery('');
+    setNameQuery('');
+    onStartAuction(randomPlayer);
   }; 
 
 
@@ -82,6 +98,14 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId }) => {
         <div className="form-actions">
           <button type="button" className="find-btn" onClick={handleFindPlayer}>
             Find Player
+          </button>
+          <button
+            type="button"
+            className="random-btn"
+            onClick={handleRandomPlayer}
+            disabled={!players || players.length === 0}
+          >
+            Random Player
           </button>
         </div>
       </div>
