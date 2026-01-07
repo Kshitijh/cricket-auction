@@ -374,7 +374,7 @@ const PlayerManagement = () => {
         <table className="data-table">
           <thead>
             <tr>
-              <th>ID</th>
+              <th>Sr. No.</th>
               <th>Image</th>
               <th>Name</th>
               <th>Role</th>
@@ -386,9 +386,9 @@ const PlayerManagement = () => {
             </tr>
           </thead>
           <tbody>
-            {players.map(player => (
+            {players.map((player, index) => (
               <tr key={player.id}>
-                <td>{player.id}</td>
+                <td>{index + 1}</td>
                 <td>
                   {playerImages[player.id] ? (
                     <img 
