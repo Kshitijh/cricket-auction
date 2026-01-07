@@ -34,7 +34,8 @@ const CricketAuction = () => {
         name: p.name,
         basePrice: p.base_price,
         role: p.role,
-        sold: p.is_sold === 1
+        sold: p.is_sold === 1,
+        jersey_no: p.jersey_no
       }));
 
       const mappedTeams = teamsData.map(t => ({

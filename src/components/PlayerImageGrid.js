@@ -1,76 +1,90 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId }) => {
-  const [playerImages, setPlayerImages] = useState({});
+  const [jerseyQuery, setJerseyQuery] = useState('');
+  const [nameQuery, setNameQuery] = useState('');
 
-  useEffect(() => {
-    const fetchPlayerImages = async () => {
-      const imageChecks = {};
-      for (const player of players) {
-        const imageUrl = await checkPlayerImage(player.name);
-        if (imageUrl) {
-          imageChecks[player.id] = imageUrl;
-        }
-      }
-      setPlayerImages(imageChecks);
-    };
-    
-    fetchPlayerImages();
-  }, [players]);
+  const handleFindPlayer = () => {
+    const jerseyProvided = jerseyQuery !== '' && jerseyQuery !== null;
+    const nameProvided = nameQuery.trim() !== '';
 
-  const checkPlayerImage = async (playerName) => {
-    try {
-      const response = await fetch(`http://localhost:5000/api/check-player-image/${encodeURIComponent(playerName)}`);
-      const data = await response.json();
-      return data.exists ? `http://localhost:5000/player-images/${data.filename}` : null;
-    } catch (error) {
-      console.error('Error checking player image:', error);
-      return null;
+    // Require at least one search field
+    if (!jerseyProvided && !nameProvided) {
+      alert('Please enter a Jersey No. or Player Name to search');
+      return;
     }
-  };
 
-  const formatPrice = (price) => {
-    return `${price.toLocaleString()} pts`;
+    let found = null;
+
+    if (jerseyProvided) {
+      const j = Number(jerseyQuery);
+      if (Number.isNaN(j) || !Number.isInteger(j) || j < 0) {
+        alert('Jersey number must be a non-negative integer');
+        return;
+      }
+
+      if (nameProvided) {
+        const q = nameQuery.trim().toLowerCase();
+        // Match both jersey number and name substring
+        found = players.find(p => p.jersey_no === j && p.name.toLowerCase().includes(q));
+      } else {
+        // Match by jersey number only
+        found = players.find(p => p.jersey_no === j);
+      }
+    } else if (nameProvided) {
+      const q = nameQuery.trim().toLowerCase();
+      found = players.find(p => p.name.toLowerCase().includes(q));
+    }
+
+    if (found) {
+      // Clear inputs and start auction
+      setJerseyQuery('');
+      setNameQuery('');
+      onStartAuction(found);
+    } else {
+      alert('Player not found');
+    }
   }; 
+
+
 
   return (
     <div className="player-image-grid-section">
-      <h2 className="section-title">Available Players - Click to Start Bidding</h2>
-      {players.length === 0 ? (
-        <p className="no-players-message">All players have been sold or marked as unsold.</p>
-      ) : (
-        <div className="player-image-grid">
-          {players.map(player => (
-            <button
-              key={player.id}
-              className={`player-image-button ${currentPlayerId === player.id ? 'current-player-button' : ''}`}
-              onClick={() => onStartAuction(player)}
-              title={`${player.name} - ${player.role} - ${formatPrice(player.basePrice)}`}
-            >
-              <div className="player-image-wrapper">
-                {playerImages[player.id] ? (
-                  <img 
-                    src={playerImages[player.id]} 
-                    alt={player.name}
-                    className="player-grid-image"
-                  />
-                ) : (
-                  <div className="player-grid-image placeholder">
-                    👤
-                  </div>
-                )}
-                {currentPlayerId === player.id && (
-                  <div className="current-badge">BIDDING</div>
-                )}
-              </div>
-              <div className="player-image-info">
-                <h3 className="player-grid-name">{player.name}</h3>
-                <p className="player-grid-role">{player.role}</p>
-              </div>
-            </button>
-          ))}
+      <div className="player-search-form">
+        <h2 className="section-title">Find Player</h2>
+        <div className="form-row">
+          <div className="form-group">
+            <label>Jersey No.</label>
+            <input
+              type="number"
+              name="jersey"
+              value={jerseyQuery}
+              onChange={(e) => setJerseyQuery(e.target.value)}
+              placeholder="Enter jersey number"
+              min="0"
+              step="1"
+            />
+            <small>Integer only</small>
+          </div>
+
+          <div className="form-group">
+            <label>Player Name</label>
+            <input
+              type="text"
+              name="playerName"
+              value={nameQuery}
+              onChange={(e) => setNameQuery(e.target.value)}
+              placeholder="Enter player name"
+            />
+          </div>
         </div>
-      )}
+
+        <div className="form-actions">
+          <button type="button" className="find-btn" onClick={handleFindPlayer}>
+            Find Player
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
