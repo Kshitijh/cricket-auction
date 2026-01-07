@@ -55,6 +55,7 @@ def init_db():
             name TEXT NOT NULL,
             role TEXT NOT NULL,
             base_price INTEGER NOT NULL,
+            jersey_no INTEGER,
             sold_price INTEGER,
             team_id INTEGER,
             is_sold BOOLEAN DEFAULT 0,
@@ -76,6 +77,13 @@ def init_db():
         )
     ''')
     
+    # Ensure jersey_no column exists for backwards compatibility
+    cursor.execute("PRAGMA table_info(players)")
+    cols = [row['name'] for row in cursor.fetchall()]
+    if 'jersey_no' not in cols:
+        cursor.execute('ALTER TABLE players ADD COLUMN jersey_no INTEGER')
+        print('Added jersey_no column to players table')
+
     conn.commit()
     conn.close()
     print("Database initialized successfully!")
@@ -119,7 +127,7 @@ def get_teams():
     # Get players for each team
     for team in teams:
         cursor.execute('''
-            SELECT id, name, role, base_price, sold_price 
+            SELECT id, name, role, base_price, jersey_no, sold_price 
             FROM players 
             WHERE team_id = ? AND is_sold = 1
         ''', (team['id'],))
@@ -345,18 +353,28 @@ def add_player():
     name = data.get('name')
     role = data.get('role')
     base_price = data.get('base_price')
+    jersey_no = data.get('jersey_no')
     
     if not all([name, role, base_price]):
         return jsonify({'error': 'Missing required fields'}), 400
+
+    # Normalize jersey_no: accept integers or null/empty
+    if jersey_no is not None and jersey_no != '':
+        try:
+            jersey_no = int(jersey_no)
+        except (ValueError, TypeError):
+            return jsonify({'error': 'jersey_no must be an integer'}), 400
+    else:
+        jersey_no = None
     
     conn = get_db_connection()
     cursor = conn.cursor()
     
     try:
         cursor.execute('''
-            INSERT INTO players (name, role, base_price)
-            VALUES (?, ?, ?)
-        ''', (name, role, base_price))
+            INSERT INTO players (name, role, base_price, jersey_no)
+            VALUES (?, ?, ?, ?)
+        ''', (name, role, base_price, jersey_no))
         
         conn.commit()
         player_id = cursor.lastrowid
@@ -374,18 +392,28 @@ def update_player(player_id):
     name = data.get('name')
     role = data.get('role')
     base_price = data.get('base_price')
+    jersey_no = data.get('jersey_no')
     
     if not all([name, role, base_price]):
         return jsonify({'error': 'Missing required fields'}), 400
+
+    # Normalize jersey_no: accept integers or null/empty
+    if jersey_no is not None and jersey_no != '':
+        try:
+            jersey_no = int(jersey_no)
+        except (ValueError, TypeError):
+            jersey_no = None
+    else:
+        jersey_no = None
     
     conn = get_db_connection()
     cursor = conn.cursor()
     
     cursor.execute('''
         UPDATE players 
-        SET name = ?, role = ?, base_price = ?
+        SET name = ?, role = ?, base_price = ?, jersey_no = ?
         WHERE id = ?
-    ''', (name, role, base_price, player_id))
+    ''', (name, role, base_price, jersey_no, player_id))
     
     conn.commit()
     

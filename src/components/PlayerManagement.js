@@ -11,7 +11,8 @@ const PlayerManagement = () => {
   const [formData, setFormData] = useState({
     name: '',
     role: 'Batsman',
-    base_price: 100
+    base_price: 100,
+    jersey_no: ''
   });
 
   useEffect(() => {
@@ -51,9 +52,10 @@ const PlayerManagement = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    const numericFields = ['base_price', 'jersey_no'];
     setFormData(prev => ({
       ...prev,
-      [name]: name === 'base_price' ? parseInt(value) : value
+      [name]: numericFields.includes(name) ? (value === '' ? '' : parseInt(value)) : value
     }));
   };
 
@@ -126,6 +128,12 @@ const PlayerManagement = () => {
   const handleAddPlayer = async (e) => {
     e.preventDefault();
     
+    // Validate jersey_no if provided
+    if (formData.jersey_no !== '' && (!Number.isInteger(formData.jersey_no) || formData.jersey_no < 0)) {
+      alert('Jersey number must be a non-negative integer');
+      return;
+    }
+    
     try {
       // Upload image first if selected
       if (selectedImage) {
@@ -160,6 +168,12 @@ const PlayerManagement = () => {
 
   const handleUpdatePlayer = async (e) => {
     e.preventDefault();
+    
+    // Validate jersey_no if provided
+    if (formData.jersey_no !== '' && (!Number.isInteger(formData.jersey_no) || formData.jersey_no < 0)) {
+      alert('Jersey number must be a non-negative integer');
+      return;
+    }
     
     try {
       // Upload new image if selected
@@ -241,7 +255,8 @@ const PlayerManagement = () => {
     setFormData({
       name: player.name,
       role: player.role,
-      base_price: player.base_price
+      base_price: player.base_price,
+      jersey_no: player.jersey_no !== undefined ? player.jersey_no : ''
     });
     setSelectedImage(null);
     
@@ -333,6 +348,20 @@ const PlayerManagement = () => {
               </div>
 
               <div className="form-group">
+                <label>Jersey No.</label>
+                <input
+                  type="number"
+                  name="jersey_no"
+                  value={formData.jersey_no}
+                  onChange={handleInputChange}
+                  placeholder="Enter jersey number"
+                  min="0"
+                  step="1"
+                />
+                <small>Integer only</small>
+              </div>
+
+              <div className="form-group">
                 <label>Role *</label>
                 <select name="role" value={formData.role} onChange={handleInputChange} required>
                   <option value="Batsman">Batsman</option>
@@ -375,6 +404,7 @@ const PlayerManagement = () => {
           <thead>
             <tr>
               <th>Sr. No.</th>
+              <th>Jersey No.</th>
               <th>Image</th>
               <th>Name</th>
               <th>Role</th>
@@ -389,6 +419,7 @@ const PlayerManagement = () => {
             {players.map((player, index) => (
               <tr key={player.id}>
                 <td>{index + 1}</td>
+                <td>{player.jersey_no !== undefined && player.jersey_no !== null ? player.jersey_no : '-'}</td>
                 <td>
                   {playerImages[player.id] ? (
                     <img 
