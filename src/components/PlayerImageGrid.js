@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId }) => {
+const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId, teams = [] }) => {
   const [jerseyQuery, setJerseyQuery] = useState('');
   const [nameQuery, setNameQuery] = useState('');
+  const [teamImages, setTeamImages] = useState({});
 
   const handleFindPlayer = () => {
     const jerseyProvided = jerseyQuery !== '' && jerseyQuery !== null;
@@ -62,6 +63,31 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId }) => {
     onStartAuction(randomPlayer);
   }; 
 
+  useEffect(() => {
+    const fetchTeamImages = async () => {
+      const imageChecks = {};
+      for (const team of teams) {
+        const imageFilename = await checkTeamImage(team.name);
+        if (imageFilename) {
+          imageChecks[team.id] = imageFilename;
+        }
+      }
+      setTeamImages(imageChecks);
+    };
+
+    fetchTeamImages();
+  }, [teams]);
+
+  const checkTeamImage = async (teamName) => {
+    try {
+      const response = await fetch(`/api/check-team-image/${encodeURIComponent(teamName)}`);
+      const data = await response.json();
+      return data.exists ? data.filename : null;
+    } catch (error) {
+      console.error('Error checking team image:', error);
+      return null;
+    }
+  };
 
 
   return (
@@ -107,6 +133,19 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId }) => {
           >
             Random Player
           </button>
+
+          <div className="random-team-logos" aria-hidden={!teams || teams.length === 0}>
+            {teams && teams.map(team => (
+              <div key={team.id} className="random-team-logo" title={team.name}>
+                {teamImages[team.id] ? (
+                  <img src={`http://localhost:5000/team-images/${teamImages[team.id]}`} alt={team.name} />
+                ) : (
+                  <div className="placeholder">🏆</div>
+                )}
+                <span className="team-tooltip">{team.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
