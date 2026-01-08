@@ -131,7 +131,7 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId, teams = [] 
             onClick={handleRandomPlayer}
             disabled={!players || players.length === 0}
           >
-            Random Player
+            New Player
           </button>
 
           <div className="random-team-logos" aria-hidden={!teams || teams.length === 0}>
