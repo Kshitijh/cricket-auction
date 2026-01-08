@@ -1,10 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnsold }) => {
   const [selectedTeam, setSelectedTeam] = useState('');
   const [bidAmount, setBidAmount] = useState('');
   const [playerImage, setPlayerImage] = useState(null);
   const [teamImages, setTeamImages] = useState({});
+  const [showSoldText, setShowSoldText] = useState(false);
+  const soldTimeoutRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (soldTimeoutRef.current) {
+        clearTimeout(soldTimeoutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     // Check team images for all teams
@@ -83,10 +93,20 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
     }
   };
 
-  const handleSold = () => {
+  const handleSold = async () => {
     if (selectedTeam) {
       const teamId = parseInt(selectedTeam);
-      onSold(teamId);
+      try {
+        const success = await onSold(teamId);
+        if (success) {
+          // Show sold badge briefly until parent clears currentPlayer
+          setShowSoldText(true);
+          soldTimeoutRef.current = setTimeout(() => setShowSoldText(false), 2200);
+        }
+      } catch (error) {
+        console.error('Error executing sold action:', error);
+      }
+
       setSelectedTeam('');
       setBidAmount('');
     } else {
@@ -141,6 +161,9 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
               <h3 className="player-name-big">{currentPlayer.name}</h3>
               <p className="player-role-big">{currentPlayer.role}</p>
             </div>
+            {(showSoldText || currentPlayer.sold) && (
+              <div className="sold-badge" aria-live="polite">SOLD!!</div>
+            )}
           </div>
           <p className="base-price">Base Price: {formatPrice(currentPlayer.basePrice)}</p>
           <div className="current-bid-display">

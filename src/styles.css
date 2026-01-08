@@ -9,8 +9,8 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -26,7 +26,7 @@ body {
 
 .cricket-auction {
   min-height: 100vh;
-  background: linear-gradient(135deg, #001F3F 0%, #41729F 100%);
+  background: linear-gradient(135deg, #001f3f 0%, #41729f 100%);
   padding: 2vh;
 }
 
@@ -44,18 +44,21 @@ body {
   margin: 0 auto;
 }
 
-.left-section, .center-section, .right-section {
+.left-section,
+.center-section,
+.right-section {
   background: white;
   border-radius: 4%;
   padding: 2vh;
   max-height: 85vh;
 }
 
-.left-section h2, .right-section h2 {
-  color: #41729F;
+.left-section h2,
+.right-section h2 {
+  color: #41729f;
   margin-bottom: 1vh;
   font-size: 1.5rem;
-  border-bottom: 0.2vh solid #41729F;
+  border-bottom: 0.2vh solid #41729f;
   padding-bottom: 1vh;
 }
 
@@ -78,12 +81,12 @@ body {
 }
 
 .player-list::-webkit-scrollbar-thumb {
-  background: #41729F;
+  background: #41729f;
   border-radius: 1vh;
 }
 
 .player-list::-webkit-scrollbar-thumb:hover {
-  background: #001F3F;
+  background: #001f3f;
 }
 
 /* ============================================
@@ -91,7 +94,7 @@ body {
    ============================================ */
 
 .player-card {
-  background: linear-gradient(135deg, #E1F1FF 0%, #ffffff 100%);
+  background: linear-gradient(135deg, #e1f1ff 0%, #ffffff 100%);
   border-radius: 1vh;
   padding: 1vh;
   transition: all 0.3s ease;
@@ -108,7 +111,8 @@ body {
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
   }
   50% {
@@ -129,9 +133,9 @@ body {
   height: 6vh;
   border-radius: 50%;
   object-fit: cover;
-  border: 0.3vh solid #41729F;
+  border: 0.3vh solid #41729f;
   flex-shrink: 0;
-  background: linear-gradient(135deg, #41729F 0%, #001F3F 100%);
+  background: linear-gradient(135deg, #41729f 0%, #001f3f 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -141,6 +145,12 @@ body {
 
 .player-profile-circle.placeholder {
   background: linear-gradient(135deg, #e0e0e0 0%, #bdbdbd 100%);
+}
+
+.sold-badge {
+  font-size: 4rem;
+  font-weight: bold;
+  color: gray;
 }
 
 .player-details {
@@ -175,7 +185,7 @@ body {
 .start-bid-btn {
   width: 100%;
   padding: 1vh;
-  background: linear-gradient(135deg, #41729F 0%, #001F3F 100%);
+  background: linear-gradient(135deg, #41729f 0%, #001f3f 100%);
   color: white;
   border: none;
   border-radius: 0.8vh;
@@ -222,17 +232,17 @@ body {
 }
 
 .current-auction h2 {
-  color: #41729F;
+  color: #41729f;
   text-align: center;
   margin-bottom: 2vh;
   font-size: 1.8rem;
-  border-bottom: 0.2vh solid #41729F;
+  border-bottom: 0.2vh solid #41729f;
   padding-bottom: 1vh;
 }
 
 .player-details {
   text-align: center;
-  background: linear-gradient(135deg, #2A2E3E 0%, #7B8FA1 50%, #E4E9EC 100%);
+  background: linear-gradient(135deg, #2a2e3e 0%, #7b8fa1 50%, #e4e9ec 100%);
   padding: 0.5vh;
   border-radius: 5%;
   box-shadow: 0 1vh 1.5vh rgba(0, 0, 0, 0.1);
@@ -285,8 +295,7 @@ body {
   font-size: 1rem;
   color: #000000;
   margin: -1vh 0;
-  padding : 1vh;
-
+  padding: 1vh;
 }
 
 .current-bid-display .label {
@@ -330,7 +339,7 @@ body {
 .team-button:hover {
   transform: translateY(-3px);
   box-shadow: 0 5vh 15vh rgba(0, 0, 0, 0.2);
-  border-color: #41729F;
+  border-color: #41729f;
 }
 
 .team-button.selected {
@@ -344,7 +353,7 @@ body {
   height: 6vh;
   border-radius: 50%;
   object-fit: cover;
-  border: 0.3vh solid #41729F;
+  border: 0.3vh solid #41729f;
   flex-shrink: 0;
   background: white;
   display: flex;
@@ -403,7 +412,8 @@ body {
   font-size: 1rem;
 }
 
-.team-select, .bid-input {
+.team-select,
+.bid-input {
   padding: 1.2vh;
   border: 0.2vh solid #dfe6e9;
   border-radius: 0.8vh;
@@ -411,9 +421,10 @@ body {
   transition: all 0.3s ease;
 }
 
-.team-select:focus, .bid-input:focus {
+.team-select:focus,
+.bid-input:focus {
   outline: none;
-  border-color: #41729F;
+  border-color: #41729f;
   box-shadow: 0 0 0 0.3vh rgba(65, 114, 159, 0.1);
 }
 
@@ -426,7 +437,7 @@ body {
 .quick-bid-btn {
   flex: 1;
   padding: 1vh;
-  background: #41729F;
+  background: #41729f;
   color: white;
   border: none;
   border-radius: 0.8vh;
@@ -437,7 +448,7 @@ body {
 }
 
 .quick-bid-btn:hover {
-  background: #001F3F;
+  background: #001f3f;
   transform: translateY(-2px);
 }
 
@@ -447,7 +458,9 @@ body {
   margin-top: 1vh;
 }
 
-.bid-btn, .sold-btn, .unsold-btn {
+.bid-btn,
+.sold-btn,
+.unsold-btn {
   flex: 1;
   padding: 1.5vh;
   border: none;
@@ -460,7 +473,7 @@ body {
 }
 
 .bid-btn {
-  background: linear-gradient(135deg, #41729F 0%, #001F3F 100%);
+  background: linear-gradient(135deg, #41729f 0%, #001f3f 100%);
 }
 
 .bid-btn:hover {
@@ -504,7 +517,7 @@ body {
 }
 
 .team-card {
-  background: linear-gradient(135deg, #E1F1FF 0%, #ffffff 100%);
+  background: linear-gradient(135deg, #e1f1ff 0%, #ffffff 100%);
   border-radius: 1vh;
   padding: 1.5vh;
   margin-bottom: 1.5vh;
@@ -517,7 +530,7 @@ body {
 }
 
 .team-header {
-  border-bottom: 0.2vh solid #41729F;
+  border-bottom: 0.2vh solid #41729f;
   padding-bottom: 1vh;
   margin-bottom: 1vh;
 }
@@ -534,9 +547,9 @@ body {
   height: 6.25vh;
   border-radius: 50%;
   object-fit: cover;
-  border: 0.2vh solid #41729F;
+  border: 0.2vh solid #41729f;
   flex-shrink: 0;
-  background: linear-gradient(135deg, #41729F 0%, #001F3F 100%);
+  background: linear-gradient(135deg, #41729f 0%, #001f3f 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -624,7 +637,8 @@ body {
 }
 
 @keyframes pulse-text {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -643,12 +657,12 @@ body {
 }
 
 .team-list::-webkit-scrollbar-thumb {
-  background: #41729F;
+  background: #41729f;
   border-radius: 1vh;
 }
 
 .team-list::-webkit-scrollbar-thumb:hover {
-  background: #001F3F;
+  background: #001f3f;
 }
 
 /* ============================================
@@ -702,7 +716,8 @@ body {
     gap: 1.5vh;
   }
 
-  .top-section, .bottom-section {
+  .top-section,
+  .bottom-section {
     padding: 1.8vh;
   }
 
@@ -723,11 +738,14 @@ body {
     margin-bottom: 2vh;
   }
 
-  .left-section, .center-section, .right-section {
+  .left-section,
+  .center-section,
+  .right-section {
     padding: 1.5vh;
   }
 
-  .player-list, .team-list {
+  .player-list,
+  .team-list {
     max-height: 40vh;
   }
 
@@ -767,7 +785,8 @@ body {
 
 /* Tablet Portrait (768px - 992px) */
 @media (max-width: 99.2vh) {
-  .cricket-auction, .admin-panel {
+  .cricket-auction,
+  .admin-panel {
     padding: 1.5vh;
   }
 
@@ -775,7 +794,8 @@ body {
     font-size: 1.8rem;
   }
 
-  .top-section, .bottom-section {
+  .top-section,
+  .bottom-section {
     padding: 1.8vh;
   }
 
@@ -795,7 +815,8 @@ body {
     font-size: 0.9rem;
   }
 
-  .player-grid-role, .player-grid-price {
+  .player-grid-role,
+  .player-grid-price {
     font-size: 0.8rem;
   }
 
@@ -875,7 +896,9 @@ body {
     flex-direction: column;
   }
 
-  .bid-btn, .sold-btn, .unsold-btn {
+  .bid-btn,
+  .sold-btn,
+  .unsold-btn {
     width: 100%;
   }
 
@@ -890,7 +913,8 @@ body {
 
 /* Mobile Landscape & Small Tablet (576px - 768px) */
 @media (max-width: 76.8vh) {
-  .cricket-auction, .admin-panel {
+  .cricket-auction,
+  .admin-panel {
     padding: 1vh;
   }
 
@@ -899,7 +923,8 @@ body {
     margin-bottom: 1.5vh;
   }
 
-  .top-section, .bottom-section {
+  .top-section,
+  .bottom-section {
     padding: 1.5vh;
   }
 
@@ -925,7 +950,8 @@ body {
     font-size: 0.85rem;
   }
 
-  .player-grid-role, .player-grid-price {
+  .player-grid-role,
+  .player-grid-price {
     font-size: 0.75rem;
   }
 
@@ -939,12 +965,15 @@ body {
     padding: 0.3vh 0.8vh;
   }
 
-  .left-section, .center-section, .right-section {
+  .left-section,
+  .center-section,
+  .right-section {
     padding: 1.2vh;
     border-radius: 1vh;
   }
 
-  .left-section h2, .right-section h2 {
+  .left-section h2,
+  .right-section h2 {
     font-size: 1.2rem;
     margin-bottom: 1.5vh;
   }
@@ -968,7 +997,8 @@ body {
     font-size: 1.1rem;
   }
 
-  .player-role, .player-base-price {
+  .player-role,
+  .player-base-price {
     font-size: 0.85rem;
   }
 
@@ -1035,7 +1065,8 @@ body {
     font-size: 0.8rem;
   }
 
-  .team-select, .bid-input {
+  .team-select,
+  .bid-input {
     padding: 1vh;
     font-size: 0.95rem;
   }
@@ -1044,7 +1075,9 @@ body {
     font-size: 0.9rem;
   }
 
-  .bid-btn, .sold-btn, .unsold-btn {
+  .bid-btn,
+  .sold-btn,
+  .unsold-btn {
     padding: 1.2vh;
     font-size: 1rem;
   }
@@ -1070,7 +1103,8 @@ body {
     padding: 0.6vh 1vh;
   }
 
-  .player-name-small, .player-price {
+  .player-name-small,
+  .player-price {
     font-size: 0.85rem;
   }
 
@@ -1094,12 +1128,14 @@ body {
     font-size: 1.2rem;
   }
 
-  .form-group input, .form-group select {
+  .form-group input,
+  .form-group select {
     padding: 1vh;
     font-size: 0.95rem;
   }
 
-  .submit-btn, .cancel-btn {
+  .submit-btn,
+  .cancel-btn {
     padding: 1vh 2vh;
     font-size: 0.95rem;
   }
@@ -1128,7 +1164,8 @@ body {
 
 /* Mobile Portrait (320px - 576px) */
 @media (max-width: 57.6vh) {
-  .cricket-auction, .admin-panel {
+  .cricket-auction,
+  .admin-panel {
     padding: 0.8vh;
   }
 
@@ -1142,7 +1179,8 @@ body {
     gap: 1vh;
   }
 
-  .top-section, .bottom-section {
+  .top-section,
+  .bottom-section {
     padding: 1.2vh;
     border-radius: 1vh;
   }
@@ -1197,12 +1235,15 @@ body {
     gap: 1vh;
   }
 
-  .left-section, .center-section, .right-section {
+  .left-section,
+  .center-section,
+  .right-section {
     padding: 1vh;
     border-radius: 0.8vh;
   }
 
-  .left-section h2, .right-section h2 {
+  .left-section h2,
+  .right-section h2 {
     font-size: 1.1rem;
     margin-bottom: 1.2vh;
     padding-bottom: 0.8vh;
@@ -1229,7 +1270,8 @@ body {
     margin-bottom: 0.5vh;
   }
 
-  .player-role, .player-base-price {
+  .player-role,
+  .player-base-price {
     font-size: 0.8rem;
     margin: 0.3vh 0;
   }
@@ -1315,7 +1357,8 @@ body {
     font-size: 0.75rem;
   }
 
-  .team-select, .bid-input {
+  .team-select,
+  .bid-input {
     padding: 0.8vh;
     font-size: 0.9rem;
   }
@@ -1338,7 +1381,9 @@ body {
     margin-top: 0.8vh;
   }
 
-  .bid-btn, .sold-btn, .unsold-btn {
+  .bid-btn,
+  .sold-btn,
+  .unsold-btn {
     padding: 1vh;
     font-size: 0.95rem;
   }
@@ -1380,7 +1425,8 @@ body {
     margin-bottom: 0.6vh;
   }
 
-  .player-name-small, .player-price {
+  .player-name-small,
+  .player-price {
     font-size: 0.8rem;
   }
 
@@ -1477,7 +1523,8 @@ body {
     margin-bottom: 1.5vh;
   }
 
-  .form-group input, .form-group select {
+  .form-group input,
+  .form-group select {
     padding: 0.8vh;
     font-size: 0.9rem;
   }
@@ -1502,7 +1549,8 @@ body {
     margin-top: 1.5vh;
   }
 
-  .submit-btn, .cancel-btn {
+  .submit-btn,
+  .cancel-btn {
     padding: 1vh 2vh;
     font-size: 0.9rem;
   }
@@ -1521,7 +1569,8 @@ body {
     padding: 0.8vh 1vh;
   }
 
-  .player-thumbnail, .player-thumbnail-placeholder {
+  .player-thumbnail,
+  .player-thumbnail-placeholder {
     width: 3.5vh;
     height: 3.5vh;
     font-size: 1.8vh;
@@ -1532,7 +1581,9 @@ body {
     font-size: 0.75rem;
   }
 
-  .edit-btn-small, .delete-btn-small, .release-btn-small {
+  .edit-btn-small,
+  .delete-btn-small,
+  .release-btn-small {
     padding: 0.5vh 0.8vh;
     font-size: 0.9rem;
   }
@@ -1595,7 +1646,9 @@ body {
     font-size: 0.9rem;
   }
 
-  .loading-container, .loading, .no-data {
+  .loading-container,
+  .loading,
+  .no-data {
     padding: 4vh 1.5vh;
     font-size: 1rem;
   }
@@ -1639,7 +1692,8 @@ body {
     font-size: 0.8rem;
   }
 
-  .player-thumbnail, .player-thumbnail-placeholder {
+  .player-thumbnail,
+  .player-thumbnail-placeholder {
     width: 3vh;
     height: 3vh;
     font-size: 1.6vh;
@@ -1648,7 +1702,8 @@ body {
 
 /* Landscape mode specific adjustments */
 @media (max-height: 60vh) and (orientation: landscape) {
-  .player-list, .team-list {
+  .player-list,
+  .team-list {
     max-height: 30vh;
   }
 
@@ -1692,7 +1747,8 @@ body {
     display: none;
   }
 
-  .cricket-auction, .admin-panel {
+  .cricket-auction,
+  .admin-panel {
     background: white;
   }
 
@@ -1700,8 +1756,11 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .left-section, .center-section, .right-section,
-  .team-card, .player-card,
+  .left-section,
+  .center-section,
+  .right-section,
+  .team-card,
+  .player-card,
   .team-management-card {
     box-shadow: none;
     border: 0.1vh solid #ddd;
@@ -1745,11 +1804,11 @@ body {
 
 .section-title {
   text-align: center;
-  color: #41729F;
+  color: #41729f;
   font-size: 1.8rem;
   margin-bottom: 2.5vh;
   padding-bottom: 1vh;
-  border-bottom: 0.3vh solid #41729F;
+  border-bottom: 0.3vh solid #41729f;
 }
 
 .no-players-message {
@@ -1779,16 +1838,16 @@ body {
 }
 
 .player-image-grid::-webkit-scrollbar-thumb {
-  background: #41729F;
+  background: #41729f;
   border-radius: 1vh;
 }
 
 .player-image-grid::-webkit-scrollbar-thumb:hover {
-  background: #001F3F;
+  background: #001f3f;
 }
 
 .player-image-button {
-  background: linear-gradient(135deg, #E1F1FF 0%, #ffffff 100%);
+  background: linear-gradient(135deg, #e1f1ff 0%, #ffffff 100%);
   border: 0.3vh solid transparent;
   border-radius: 1.5vh;
   padding: 1.5vh;
@@ -1805,7 +1864,7 @@ body {
 .player-image-button:hover {
   transform: translateY(-0.8vh) scale(1.05);
   box-shadow: 0 0.8vh 2vh rgba(0, 0, 0, 0.3);
-  border-color: #41729F;
+  border-color: #41729f;
 }
 
 .player-image-button.current-player-button {
@@ -1815,7 +1874,8 @@ body {
 }
 
 @keyframes pulse-button {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
   }
   50% {
@@ -1835,8 +1895,8 @@ body {
   height: 12vh;
   border-radius: 50%;
   object-fit: cover;
-  border: 0.4vh solid #41729F;
-  background: linear-gradient(135deg, #41729F 0%, #001F3F 100%);
+  border: 0.4vh solid #41729f;
+  background: linear-gradient(135deg, #41729f 0%, #001f3f 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1870,7 +1930,8 @@ body {
 }
 
 @keyframes badge-pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
@@ -1932,7 +1993,7 @@ body {
 
 .admin-panel {
   min-height: 100vh;
-  background: linear-gradient(135deg, #E1F1FF 0%, #ffffff 100%);
+  background: linear-gradient(135deg, #e1f1ff 0%, #ffffff 100%);
   padding: 2vh;
 }
 
@@ -1955,7 +2016,7 @@ body {
 
 .back-btn {
   padding: 1vh 2vh;
-  background: linear-gradient(135deg, #41729F 0%, #001F3F 100%);
+  background: linear-gradient(135deg, #41729f 0%, #001f3f 100%);
   color: white;
   border: none;
   border-radius: 0.8vh;
@@ -2052,11 +2113,11 @@ body {
 }
 
 .tab-btn:hover {
-  background: #E1F1FF;
+  background: #e1f1ff;
 }
 
 .tab-btn.active {
-  background: linear-gradient(135deg, #41729F 0%, #001F3F 100%);
+  background: linear-gradient(135deg, #41729f 0%, #001f3f 100%);
   color: white;
 }
 
@@ -2094,7 +2155,7 @@ body {
 
 .add-btn {
   padding: 1.2vh 2.4vh;
-  background: linear-gradient(135deg, #41729F 0%, #001F3F 100%);
+  background: linear-gradient(135deg, #41729f 0%, #001f3f 100%);
   color: white;
   border: none;
   border-radius: 0.8vh;
@@ -2110,7 +2171,7 @@ body {
 }
 
 .form-container {
-  background: linear-gradient(135deg, #E1F1FF 0%, #ffffff 100%);
+  background: linear-gradient(135deg, #e1f1ff 0%, #ffffff 100%);
   padding: 2.5vh;
   border-radius: 1.2vh;
   margin-bottom: 3vh;
@@ -2155,7 +2216,7 @@ body {
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #41729F;
+  border-color: #41729f;
   box-shadow: 0 0 0 0.3vh rgba(65, 114, 159, 0.1);
 }
 
@@ -2181,7 +2242,7 @@ body {
   height: 15vh;
   border-radius: 50%;
   overflow: hidden;
-  border: 0.4vh solid #41729F;
+  border: 0.4vh solid #41729f;
   background: #f0f0f0;
 }
 
@@ -2198,7 +2259,7 @@ body {
 .file-input-label {
   display: inline-block;
   padding: 1.2vh 2.4vh;
-  background: linear-gradient(135deg, #41729F 0%, #001F3F 100%);
+  background: linear-gradient(135deg, #41729f 0%, #001f3f 100%);
   color: white;
   border-radius: 0.8vh;
   cursor: pointer;
@@ -2230,13 +2291,13 @@ body {
   height: 3.6vh;
   border-radius: 50%;
   overflow: visible;
-  border: 0.14vh solid #41729F;
+  border: 0.14vh solid #41729f;
   background: #fff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  box-shadow: 0 0.15vh 0.5vh rgba(0,0,0,0.12);
+  box-shadow: 0 0.15vh 0.5vh rgba(0, 0, 0, 0.12);
 }
 
 .random-team-logo img {
@@ -2255,7 +2316,7 @@ body {
   bottom: calc(100% + 6px);
   left: 50%;
   transform: translateX(-50%) translateY(6px);
-  background: rgba(0,0,0,0.9);
+  background: rgba(0, 0, 0, 0.9);
   color: #fff;
   padding: 0.2vh 0.6vh;
   border-radius: 0.6vh;
@@ -2274,7 +2335,7 @@ body {
 
 .submit-btn {
   padding: 1.2vh 3vh;
-  background: linear-gradient(135deg, #41729F 0%, #001F3F 100%);
+  background: linear-gradient(135deg, #41729f 0%, #001f3f 100%);
   color: white;
   border: none;
   border-radius: 0.8vh;
@@ -2317,7 +2378,7 @@ body {
 }
 
 .data-table thead {
-  background: linear-gradient(135deg, #41729F 0%, #001F3F 100%);
+  background: linear-gradient(135deg, #41729f 0%, #001f3f 100%);
   color: white;
 }
 
@@ -2341,7 +2402,7 @@ body {
   height: 4vh;
   border-radius: 50%;
   object-fit: cover;
-  border: 0.2vh solid #41729F;
+  border: 0.2vh solid #41729f;
 }
 
 .player-thumbnail-placeholder {
@@ -2411,11 +2472,11 @@ body {
 }
 
 .edit-btn-small {
-  background: #41729F;
+  background: #41729f;
 }
 
 .edit-btn-small:hover {
-  background: #001F3F;
+  background: #001f3f;
   transform: scale(1.1);
 }
 
@@ -2445,7 +2506,7 @@ body {
 }
 
 .team-management-card {
-  background: linear-gradient(135deg, #E1F1FF 0%, #ffffff 100%);
+  background: linear-gradient(135deg, #e1f1ff 0%, #ffffff 100%);
   border-radius: 1.2vh;
   padding: 2vh;
   box-shadow: 0 0.4vh 1.2vh rgba(0, 0, 0, 0.1);
@@ -2463,7 +2524,7 @@ body {
   margin-bottom: 2vh;
   justify-content: space-between;
   padding-bottom: 1.5vh;
-  border-bottom: 0.2vh solid #41729F;
+  border-bottom: 0.2vh solid #41729f;
   flex-direction: column;
 }
 
@@ -2478,7 +2539,7 @@ body {
   height: 7vh;
   border-radius: 1.2vh;
   object-fit: cover;
-  border: 0.3vh solid #41729F;
+  border: 0.3vh solid #41729f;
   flex-shrink: 0;
   background: white;
   display: flex;

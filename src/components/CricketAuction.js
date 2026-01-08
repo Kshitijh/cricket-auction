@@ -59,10 +59,9 @@ const CricketAuction = () => {
   };
 
   const startAuction = (player) => {
-    if (!player.sold) {
-      setCurrentPlayer(player);
-      setCurrentBid(player.basePrice);
-    }
+    // Allow showing sold players too so users can search and view them
+    setCurrentPlayer(player);
+    setCurrentBid(player.basePrice || 0);
   };
 
   const placeBid = async (teamId, playerName, bidValue) => {
@@ -131,9 +130,11 @@ const CricketAuction = () => {
             setCurrentPlayer(null);
             setCurrentBid(0);
             alert(`${currentPlayer.name} sold to ${team.name} for ${currentBid} pts!`);
+            return true;
           } else {
             const error = await response.json();
             alert('Error: ' + error.error);
+            return false;
           }
         } catch (error) {
           console.error('Error selling player:', error);
@@ -163,9 +164,11 @@ const CricketAuction = () => {
           setCurrentPlayer(null);
           setCurrentBid(0);
           alert(`${currentPlayer.name} went unsold!`);
+          return true;
         } else {
           const error = await response.json();
           alert('Error: ' + error.error);
+          return false;
         }
       } catch (error) {
         console.error('Error marking player unsold:', error);
@@ -174,7 +177,8 @@ const CricketAuction = () => {
     }
   };
 
-  const availablePlayers = players.filter(p => !p.sold);
+  // Include sold players so they remain searchable by jersey or name
+  const availablePlayers = players;
 
   if (loading) {
     return (
