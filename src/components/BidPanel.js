@@ -182,48 +182,6 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
         </div>
 
         <div className="bid-controls">
-          <div className="form-group">
-            <label>Select Team:</label>
-            <div className="team-buttons-grid">
-              {teams.map(team => (
-                <button
-                  key={team.id}
-                  type="button"
-                  className={`team-button ${selectedTeam === team.id.toString() ? 'selected' : ''}`}
-                  onClick={() => handleTeamSelect(team.id)}
-                  title={`${team.name} - Budget: ${formatPrice(team.budget)}`}
-                >
-                  {teamImages[team.id] ? (
-                    <img 
-                      src={teamImages[team.id]} 
-                      alt={team.name}
-                      className="team-button-logo"
-                    />
-                  ) : (
-                    <div className="team-button-logo placeholder">
-                      {getTeamInitials(team.name)}
-                    </div>
-                  )}
-                  <div className="team-button-info">
-                    <span className="team-button-name">{team.name}</span>
-                    <span className="team-button-budget">{formatPrice(team.budget)}</span>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="bid-amount">Bid Value:</label>
-            <input 
-              id="bid-amount"
-              type="number" 
-              value={bidAmount}
-              onChange={(e) => setBidAmount(e.target.value)}
-              placeholder="Enter bid amount"
-              className="bid-input"
-            />
-          </div>
         </div>
       </div>
     </div>

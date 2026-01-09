@@ -326,11 +326,11 @@ body {
 .team-button {
   display: flex;
   align-items: center;
-  gap: 1.5vh;
+  gap: 0.1vh;
   padding: 1vh;
   background: white;
   border: 0.3vh solid transparent;
-  border-radius: 1.2vh;
+  border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2vh 8vh rgba(0, 0, 0, 0.1);

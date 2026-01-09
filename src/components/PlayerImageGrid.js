@@ -4,6 +4,8 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId, teams = [],
   const [jerseyQuery, setJerseyQuery] = useState('');
   const [nameQuery, setNameQuery] = useState('');
   const [teamImages, setTeamImages] = useState({});
+  const [bidAmount, setBidAmount] = useState('');
+  const [selectedTeam, setSelectedTeam] = useState('');
 
   const handleFindPlayer = () => {
     const jerseyProvided = jerseyQuery !== '' && jerseyQuery !== null;
@@ -41,6 +43,8 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId, teams = [],
       // Clear inputs and start auction
       setJerseyQuery('');
       setNameQuery('');
+      setBidAmount('');
+      setSelectedTeam('');
       onStartAuction(found);
     } else {
       alert('Player not found');
@@ -60,12 +64,34 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId, teams = [],
     // Clear inputs and start auction
     setJerseyQuery('');
     setNameQuery('');
+    setBidAmount('');
+    setSelectedTeam('');
     onStartAuction(randomPlayer);
   };
 
   const handlePlaceBid = () => {
     if (!currentPlayer || !onPlaceBid) return;
-    onPlaceBid(null, currentPlayer.name, currentBid + 100); // !!important - later change the +100 to the input bid amount.
+    
+    if (!bidAmount) {
+      alert('Please enter a bid amount');
+      return;
+    }
+    
+    const bidValue = parseInt(bidAmount);
+    
+    // Validate the bid amount
+    if (isNaN(bidValue)) {
+      alert('Please enter a valid bid amount');
+      return;
+    }
+    
+    if (bidValue <= currentBid) {
+      alert('Bid must be higher than current bid!');
+      return;
+    }
+    
+    onPlaceBid(null, currentPlayer.name, bidValue);
+    setBidAmount('');
   };
 
   const handleSold = async () => {
@@ -73,8 +99,15 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId, teams = [],
       alert('No player in auction');
       return;
     }
+    if (!selectedTeam) {
+      alert('Please Select a Team!');
+      return;
+    }
     try {
-      await onSold(null);
+      const teamId = parseInt(selectedTeam);
+      await onSold(teamId);
+      setSelectedTeam('');
+      setBidAmount('');
     } catch (error) {
       console.error('Error marking player as sold:', error);
     }
@@ -86,7 +119,26 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId, teams = [],
       return;
     }
     onUnsold();
+    setSelectedTeam('');
+    setBidAmount('');
   }; 
+
+  const handleTeamSelect = (teamId) => {
+    setSelectedTeam(teamId.toString());
+  };
+
+  const getTeamInitials = (teamName) => {
+    return teamName
+      .split(' ')
+      .map(word => word[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
+  const formatPrice = (price) => {
+    return `${price.toLocaleString()} pts`;
+  };
 
   useEffect(() => {
     const fetchTeamImages = async () => {
@@ -157,9 +209,45 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId, teams = [],
 
 
           <div className="action-buttons-small">
-            <button onClick={handlePlaceBid} className="bid-btn-small" title="Place Bid">Bid</button>
-            <button onClick={handleSold} className="sold-btn-small" title="Mark as Sold">Sold</button>
-            <button onClick={handleUnsold} className="unsold-btn-small" title="Mark as Unsold">Unsold</button>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <button onClick={handlePlaceBid} className="bid-btn-small" title="Place Bid">Bid</button>
+              <input 
+                type="number" 
+                value={bidAmount}
+                onChange={(e) => setBidAmount(e.target.value)}
+                placeholder="amount"
+                style={{ width: '80px', padding: '4px 8px', fontSize: '12px' }}
+              />
+              <button onClick={handleSold} className="sold-btn-small" title="Mark as Sold">Sold</button>
+              <button onClick={handleUnsold} className="unsold-btn-small" title="Mark as Unsold">Unsold</button>
+            </div>
+            
+            <div className="team-buttons-grid">
+              {teams.map(team => (
+                <button
+                  key={team.id}
+                  type="button"
+                  className={`team-button ${selectedTeam === team.id.toString() ? 'selected' : ''}`}
+                  onClick={() => handleTeamSelect(team.id)}
+                  title={`${team.name} - Budget: ${formatPrice(team.budget)}`}
+                >
+                  {teamImages[team.id] ? (
+                    <img 
+                      src={teamImages[team.id]} 
+                      alt={team.name}
+                      className="team-button-logo"
+                    />
+                  ) : (
+                    <div className="team-button-logo placeholder">
+                      {getTeamInitials(team.name)}
+                    </div>
+                  )}
+                  <div className="team-button-info">
+                    
+                  </div>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
