@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId, teams = [] }) => {
+const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId, teams = [], currentPlayer, currentBid, onPlaceBid, onSold, onUnsold }) => {
   const [jerseyQuery, setJerseyQuery] = useState('');
   const [nameQuery, setNameQuery] = useState('');
   const [teamImages, setTeamImages] = useState({});
@@ -61,6 +61,31 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId, teams = [] 
     setJerseyQuery('');
     setNameQuery('');
     onStartAuction(randomPlayer);
+  };
+
+  const handlePlaceBid = () => {
+    if (!currentPlayer || !onPlaceBid) return;
+    onPlaceBid(null, currentPlayer.name, currentBid + 100); // !!important - later change the +100 to the input bid amount.
+  };
+
+  const handleSold = async () => {
+    if (!currentPlayer || !onSold) {
+      alert('No player in auction');
+      return;
+    }
+    try {
+      await onSold(null);
+    } catch (error) {
+      console.error('Error marking player as sold:', error);
+    }
+  };
+
+  const handleUnsold = () => {
+    if (!currentPlayer || !onUnsold) {
+      alert('No player in auction');
+      return;
+    }
+    onUnsold();
   }; 
 
   useEffect(() => {
@@ -93,10 +118,8 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId, teams = [] 
   return (
     <div className="player-image-grid-section">
       <div className="player-search-form">
-        <h2 className="section-title">Find Player</h2>
         <div className="form-row">
           <div className="form-group">
-            <label>Player Name</label>
             <input
               type="text"
               name="playerName"
@@ -131,17 +154,12 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId, teams = [] 
             New Player
           </button>
 
-          <div className="random-team-logos" aria-hidden={!teams || teams.length === 0}>
-            {teams && teams.map(team => (
-              <div key={team.id} className="random-team-logo" title={team.name}>
-                {teamImages[team.id] ? (
-                  <img src={`http://localhost:5000/team-images/${teamImages[team.id]}`} alt={team.name} />
-                ) : (
-                  <div className="placeholder">🏆</div>
-                )}
-                <span className="team-tooltip">{team.name}</span>
-              </div>
-            ))}
+
+
+          <div className="action-buttons-small">
+            <button onClick={handlePlaceBid} className="bid-btn-small" title="Place Bid">Bid</button>
+            <button onClick={handleSold} className="sold-btn-small" title="Mark as Sold">Sold</button>
+            <button onClick={handleUnsold} className="unsold-btn-small" title="Mark as Unsold">Unsold</button>
           </div>
         </div>
       </div>

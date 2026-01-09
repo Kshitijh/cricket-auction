@@ -224,18 +224,6 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
               className="bid-input"
             />
           </div>
-
-          <div className="quick-bids">
-            <button onClick={() => incrementBid(100)} className="quick-bid-btn">+100</button>
-            <button onClick={() => incrementBid(500)} className="quick-bid-btn">+500</button>
-            <button onClick={() => incrementBid(1000)} className="quick-bid-btn">+1000</button>
-          </div>
-
-          <div className="action-buttons">
-            <button onClick={handlePlaceBid} className="bid-btn">Place Bid</button>
-            <button onClick={handleSold} className="sold-btn">SOLD!</button>
-            <button onClick={handleUnsold} className="unsold-btn">UNSOLD</button>
-          </div>
         </div>
       </div>
     </div>

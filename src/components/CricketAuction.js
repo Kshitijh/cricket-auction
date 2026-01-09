@@ -213,6 +213,11 @@ const CricketAuction = () => {
             onStartAuction={startAuction}
             currentPlayerId={currentPlayer?.id}
             teams={teams}
+            currentPlayer={currentPlayer}
+            currentBid={currentBid}
+            onPlaceBid={placeBid}
+            onSold={soldPlayer}
+            onUnsold={unsoldPlayer}
           />
         </div>
       </div>
