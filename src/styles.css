@@ -256,9 +256,9 @@ body {
 }
 
 .player-auction-image {
-  width: 20vh;
-  height: 20vh;
-  border-radius: 40%;
+  width: 27vh;
+  height: 27vh;
+  border-radius: 10%;
   object-fit: cover;
   border: 0.7vh solid #fff;
   box-shadow: 0 4vh 10vh rgba(0, 0, 0, 0.2);
@@ -266,8 +266,8 @@ body {
   align-items: center;
   justify-content: center;
   color: white;
-  margin-left: 4vh;
-  margin-top: 2vh;
+  margin-left: 7vh;
+  margin-top: 3vh;
 }
 
 .player-auction-image.placeholder {
@@ -324,12 +324,13 @@ body {
 }
 
 .team-button {
+  height: 2vh;
   display: flex;
   align-items: center;
   gap: 0.1vh;
-  padding: 1vh;
+  padding: 0.1vh;
   background: white;
-  border: 0.3vh solid transparent;
+  border: 0.1vh solid transparent;
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -1794,7 +1795,7 @@ body {
 .bottom-section {
   background: white;
   border-radius: 1.5vh;
-  padding: 2.5vh;
+  padding: 3vh;
   box-shadow: 0 1vh 3vh rgba(0, 0, 0, 0.3);
 }
 

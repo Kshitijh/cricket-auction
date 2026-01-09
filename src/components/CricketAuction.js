@@ -183,7 +183,7 @@ const CricketAuction = () => {
   if (loading) {
     return (
       <div className="cricket-auction">
-        <h1 className="auction-title">🏏 Cricket Player Auction</h1>
+        <h1 className="auction-title">🏏 Chandraprabhu Premier League</h1>
         <div className="loading-container">
           <p>Loading auction data...</p>
         </div>
@@ -193,7 +193,7 @@ const CricketAuction = () => {
 
   return (
     <div className="cricket-auction">
-      <h1 className="auction-title">🏏 Cricket Player Auction</h1>
+      <h1 className="auction-title">🏏 Chandraprabhu Premier League 🏏</h1>
       
       <div className="auction-container-new">
         <div className="top-section">
