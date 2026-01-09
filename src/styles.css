@@ -2280,6 +2280,21 @@ body {
   align-items: center;
 }
 
+.form-actions .jersey-small {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.form-actions .jersey-small label {
+  font-size: 0.85rem;
+}
+
+.form-actions .jersey-small input {
+  width: 7vh;
+  padding: 0.5vh 0.6vh !important;
+  font-size: 0.85rem;
+}
+
 .random-team-logos {
   display: flex;
   gap: 0.6vh;

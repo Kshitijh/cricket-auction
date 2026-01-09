@@ -96,20 +96,6 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId, teams = [] 
         <h2 className="section-title">Find Player</h2>
         <div className="form-row">
           <div className="form-group">
-            <label>Jersey No.</label>
-            <input
-              type="number"
-              name="jersey"
-              value={jerseyQuery}
-              onChange={(e) => setJerseyQuery(e.target.value)}
-              placeholder="Enter jersey number"
-              min="0"
-              step="1"
-            />
-            <small>Integer only</small>
-          </div>
-
-          <div className="form-group">
             <label>Player Name</label>
             <input
               type="text"
@@ -122,6 +108,17 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId, teams = [] 
         </div>
 
         <div className="form-actions">
+          <div className="form-group jersey-small">
+            <input
+              type="number"
+              name="jersey"
+              value={jerseyQuery}
+              onChange={(e) => setJerseyQuery(e.target.value)}
+              placeholder="No."
+              min="0"
+              step="1"
+            />
+          </div>
           <button type="button" className="find-btn" onClick={handleFindPlayer}>
             Find Player
           </button>

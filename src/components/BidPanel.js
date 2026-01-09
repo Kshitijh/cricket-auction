@@ -129,6 +129,15 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
     setBidAmount(newBid.toString());
   };
 
+  const getTeamInitials = (teamName) => {
+    return teamName
+      .split(' ')
+      .map(word => word[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
   if (!currentPlayer) {
     return (
       <div className="bid-panel">
@@ -192,7 +201,7 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
                     />
                   ) : (
                     <div className="team-button-logo placeholder">
-                      🏆
+                      {getTeamInitials(team.name)}
                     </div>
                   )}
                   <div className="team-button-info">

@@ -197,15 +197,6 @@ const CricketAuction = () => {
       
       <div className="auction-container-new">
         <div className="top-section">
-          <PlayerImageGrid 
-            players={availablePlayers}
-            onStartAuction={startAuction}
-            currentPlayerId={currentPlayer?.id}
-            teams={teams}
-          />
-        </div>
-
-        <div className="bottom-section">
           <BidPanel 
             currentPlayer={currentPlayer}
             currentBid={currentBid}
@@ -213,6 +204,15 @@ const CricketAuction = () => {
             onPlaceBid={placeBid}
             onSold={soldPlayer}
             onUnsold={unsoldPlayer}
+          />
+        </div>
+
+        <div className="bottom-section">
+          <PlayerImageGrid 
+            players={availablePlayers}
+            onStartAuction={startAuction}
+            currentPlayerId={currentPlayer?.id}
+            teams={teams}
           />
         </div>
       </div>
