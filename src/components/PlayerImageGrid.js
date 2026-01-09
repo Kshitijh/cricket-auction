@@ -57,9 +57,17 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId, teams = [],
       return;
     }
 
+    // Filter out sold players to only select from available players
+    const availablePlayers = players.filter(p => !p.sold);
+    
+    if (availablePlayers.length === 0) {
+      alert('No available players remaining');
+      return;
+    }
+
     // Pick a random available player
-    const idx = Math.floor(Math.random() * players.length);
-    const randomPlayer = players[idx];
+    const idx = Math.floor(Math.random() * availablePlayers.length);
+    const randomPlayer = availablePlayers[idx];
 
     // Clear inputs and start auction
     setJerseyQuery('');
