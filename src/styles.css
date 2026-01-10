@@ -317,10 +317,11 @@ body {
 }
 
 .team-buttons-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: nowrap;
   gap: 1.2vh;
   margin-top: 1vh;
+  
 }
 
 .team-button {
@@ -1797,6 +1798,10 @@ body {
   border-radius: 1.5vh;
   padding: 3vh;
   box-shadow: 0 1vh 3vh rgba(0, 0, 0, 0.3);
+  position: fixed;
+  bottom: 2vh;
+  z-index: 10;
+  width: calc(100% - 20vh);
 }
 
 .player-image-grid-section {
