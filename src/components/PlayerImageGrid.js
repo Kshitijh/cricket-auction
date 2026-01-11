@@ -231,7 +231,7 @@ const PlayerImageGrid = ({ players, onStartAuction, currentPlayerId, teams = [],
             </div>
             
             <div className="team-buttons-grid">
-              {teams.map(team => (
+              {teams.filter(team => team && team.id != null).map(team => (
                 <button
                   key={team.id}
                   type="button"
