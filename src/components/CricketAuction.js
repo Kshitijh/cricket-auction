@@ -65,7 +65,7 @@ const CricketAuction = () => {
   };
 
   const placeBid = async (teamId, playerName, bidValue) => {
-    console.log('placeBid called:', { teamId, playerName, bidValue, currentBid });
+    //console.log('placeBid called:', { teamId, playerName, bidValue, currentBid });
     if (currentPlayer && bidValue > currentBid) {
       // Optimistically update the UI immediately so the Current Bid display reflects the user's action
       const prevBid = currentBid;
@@ -73,7 +73,7 @@ const CricketAuction = () => {
 
       // If no team is selected, keep the update local and don't call the backend
       if (teamId === null || teamId === undefined) {
-        console.log('No team selected — updated locally to', bidValue);
+        //console.log('No team selected — updated locally to', bidValue);
         return;
       }
 
@@ -91,7 +91,7 @@ const CricketAuction = () => {
 
         if (response.ok) {
           // success - currentBid already set optimistically
-          console.log('Bid recorded on server');
+          //console.log('Bid recorded on server');
         } else {
           const error = await response.json();
           // revert optimistic update on failure
