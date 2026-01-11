@@ -256,8 +256,8 @@ body {
 }
 
 .player-auction-image {
-  width: 27vh;
-  height: 27vh;
+  width: 32vh;
+  height: 38vh;
   border-radius: 10%;
   object-fit: cover;
   border: 0.7vh solid #fff;
@@ -279,10 +279,28 @@ body {
   text-align: left;
 }
 
+.player-name-row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
 .player-name-big {
   font-size: 2rem;
   margin: 0 0 1vh 0;
   color: #ffffff;
+}
+
+.sold-badge-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sold-logo {
+  height: 20vh;
+  width: auto;
+  object-fit: contain;
 }
 
 .player-role-big {

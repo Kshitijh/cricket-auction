@@ -167,12 +167,17 @@ const BidPanel = ({ currentPlayer, currentBid, teams, onPlaceBid, onSold, onUnso
               </div>
             )}
             <div className="player-auction-info">
-              <h3 className="player-name-big">{currentPlayer.name}</h3>
+              <div className="player-name-row">
+                <h3 className="player-name-big">{currentPlayer.name}</h3>
+                <div className="sold-badge-container">
+                  {(showSoldText || currentPlayer.sold) && (
+                    <div className="sold-badge" aria-live="polite">SOLD!!</div>
+                  )}
+                  <img src="/kalpataru_logo.png" alt="Logo" className="sold-logo" />
+                </div>
+              </div>
               <p className="player-role-big">{currentPlayer.role}</p>
             </div>
-            {(showSoldText || currentPlayer.sold) && (
-              <div className="sold-badge" aria-live="polite">SOLD!!</div>
-            )}
           </div>
           <p className="base-price">Base Price: {formatPrice(currentPlayer.basePrice)}</p>
           <div className="current-bid-display">
