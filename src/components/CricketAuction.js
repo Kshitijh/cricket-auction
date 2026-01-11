@@ -129,7 +129,6 @@ const CricketAuction = () => {
             await fetchData();
             setCurrentPlayer(null);
             setCurrentBid(0);
-            alert(`${currentPlayer.name} sold to ${team.name} for ${currentBid} pts!`);
             return true;
           } else {
             const error = await response.json();
