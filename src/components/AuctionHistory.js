@@ -1,107 +1,69 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Clock, Award, User } from 'lucide-react';
+import { useAuction } from '../context/AuctionContext';
+import { formatCurrency } from '../utils/helpers';
 
 const AuctionHistory = () => {
-  const [history, setHistory] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { state } = useAuction();
+  const { auctionHistory } = state;
 
-  useEffect(() => {
-    fetchHistory();
-  }, []);
-
-  const fetchHistory = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch('http://localhost:5000/api/auction/history');
-      const data = await response.json();
-      setHistory(data);
-    } catch (error) {
-      console.error('Error fetching auction history:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleDeleteHistory = async (historyId) => {
-    if (window.confirm('Are you sure you want to delete this history record?')) {
-      try {
-        const response = await fetch(`http://localhost:5000/api/admin/auction-history/${historyId}`, {
-          method: 'DELETE'
-        });
-
-        if (response.ok) {
-          alert('History record deleted successfully!');
-          fetchHistory();
-        } else {
-          const error = await response.json();
-          alert('Error: ' + error.error);
-        }
-      } catch (error) {
-        console.error('Error deleting history:', error);
-        alert('Error deleting history record');
-      }
-    }
-  };
-
-  const formatPrice = (price) => {
-    return `${price.toLocaleString()} pts`;
-  };
-
-  const formatDateTime = (datetime) => {
-    const date = new Date(datetime);
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp);
     return date.toLocaleString();
   };
 
-  if (loading) {
-    return <div className="loading">Loading auction history...</div>;
-  }
-
   return (
-    <div className="management-section">
-      <div className="section-header">
-        <h2>Auction History</h2>
-        <p className="subtitle">Complete bidding history for all players</p>
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <h3 className="text-2xl font-bold text-white">Auction History</h3>
+        <span className="text-dark-400 text-sm">{auctionHistory.length} transactions</span>
       </div>
 
-      {history.length === 0 ? (
-        <div className="no-data">
-          <p>No auction history available yet.</p>
-        </div>
-      ) : (
-        <div className="table-container">
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Player Name</th>
-                <th>Role</th>
-                <th>Team Name</th>
-                <th>Bid Amount</th>
-                <th>Bid Time</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {history.map(record => (
-                <tr key={record.id}>
-                  <td>{record.id}</td>
-                  <td className="player-name-col">{record.player_name}</td>
-                  <td>{record.player_role}</td>
-                  <td>{record.team_name}</td>
-                  <td className="price-col">{formatPrice(record.bid_amount)}</td>
-                  <td className="datetime-col">{formatDateTime(record.bid_time)}</td>
-                  <td className="actions-col">
-                    <button 
-                      className="delete-btn-small" 
-                      onClick={() => handleDeleteHistory(record.id)}
-                      title="Delete"
-                    >
-                      🗑️
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <div className="space-y-3">
+        {auctionHistory.map((item, index) => (
+          <motion.div
+            key={item.id}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.05 }}
+            className="bg-dark-800 rounded-lg p-4 border border-dark-700 hover:border-dark-600 transition-all"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4 flex-1">
+                <div className="bg-primary-600/20 p-3 rounded-full">
+                  <User className="text-primary-400" size={20} />
+                </div>
+                <div className="flex-1">
+                  <h4 className="text-white font-semibold">{item.playerName}</h4>
+                  <div className="flex items-center space-x-4 mt-1">
+                    <span className={`text-sm ${item.teamName === 'Unsold' ? 'text-red-400' : 'text-primary-400'}`}>
+                      {item.teamName}
+                    </span>
+                    <span className="text-dark-400 text-sm flex items-center">
+                      <Clock size={14} className="mr-1" />
+                      {formatDate(item.timestamp)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="text-right">
+                <div className="flex items-center text-green-400 font-bold text-xl">
+                  <Award size={20} className="mr-1" />
+                  {item.amount > 0 ? formatCurrency(item.amount) : 'UNSOLD'}
+                </div>
+                {item.amount > 0 && (
+                  <span className="text-dark-400 text-sm">points</span>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {auctionHistory.length === 0 && (
+        <div className="text-center py-12 text-dark-400">
+          <p>No auction history yet. Start auctioning players to see the history here.</p>
         </div>
       )}
     </div>

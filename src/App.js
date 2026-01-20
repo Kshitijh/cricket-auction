@@ -1,27 +1,12 @@
-import './styles.css';
-import { useState } from 'react';
-import CricketAuction from './components/CricketAuction';
-import AdminPanel from './components/AdminPanel';
+import React from 'react';
+import { AuctionProvider } from './context/AuctionContext';
+import AuctionBoard from './components/AuctionBoard';
 
 function App() {
-  const [view, setView] = useState('auction'); // 'auction' or 'admin'
-
   return (
-    <div className="App">
-      {view === 'auction' ? (
-        <>
-          <button 
-            className="admin-toggle-btn" 
-            onClick={() => setView('admin')}
-          >
-            🔧 Admin Panel
-          </button>
-          <CricketAuction />
-        </>
-      ) : (
-        <AdminPanel onBack={() => setView('auction')} />
-      )}
-    </div>
+    <AuctionProvider>
+      <AuctionBoard />
+    </AuctionProvider>
   );
 }
 
